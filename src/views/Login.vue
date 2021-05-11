@@ -48,7 +48,7 @@ export default {
   methods: {
     signUp() {
       axios
-        .post("https://ea2df4abb1ec.ngrok.io/v1/auth", {
+        .post("/auth", {
           email: this.email,
           password: this.password,
         })
@@ -78,7 +78,7 @@ export default {
       console.log(this.email);
       console.log(this.password);
       axios
-        .post("https://ea2df4abb1ec.ngrok.io/v1/auth/sign_in", {
+        .post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
