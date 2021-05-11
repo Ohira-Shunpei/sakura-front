@@ -14,20 +14,6 @@ export default {
   components: {
     HomeAbout,
     // Flash
-  },
-  mounted: {
-   // Vueインスタンスに変化があったら発動する
-    updated() {
-
-      // setTimeoutで30ms後にshowをfalseにする
-      // setTimeout(() => {
-      //    this.$store.commit('setMessage', {
-      //     status: false,
-      //     messasge: ''
-      //   })}
-      //   ,30
-      // )
-    }
   }
 }
 </script>
