@@ -65,7 +65,6 @@ export default {
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
           },
-          console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
         });
            this.$store.commit('setMessage', {
@@ -76,15 +75,14 @@ export default {
       
     },
     signIn() {
-      console.log(this.email);
-      console.log(this.password);
+     
       axios()
         .post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-          console.log(response);
+        
           localStorage.setItem(
             "access-token",
             response.headers["access-token"]
@@ -96,7 +94,7 @@ export default {
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
           },
-          console.log(this.user),
+         
           this.$store.dispatch('userLogin', this.user)
           this.$store.commit('setMessage', {
           status: false,
