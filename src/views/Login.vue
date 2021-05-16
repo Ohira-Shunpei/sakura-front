@@ -11,7 +11,7 @@
         v-model="password"
         label="Password"
         ></v-text-field>
-        <v-btn class="mr-4" @click="signUp">サインアップ</v-btn>
+        <v-btn class="mr-4" @click="signUp">新規登録</v-btn>
     </v-row>
     <v-row>
         <v-text-field
@@ -22,7 +22,7 @@
         v-model="password"
         label="Password"
         ></v-text-field>
-        <v-btn class="mr-4" @click="signIn">サインイン</v-btn>
+        <v-btn class="mr-4" @click="signIn">ログイン</v-btn>
     </v-row>
   </v-form>
   </v-container>
