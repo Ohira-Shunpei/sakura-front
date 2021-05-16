@@ -1,10 +1,8 @@
 <template>
   <v-container fluid fill-height class="background-holder__content">
-    <v-row>
       <v-col class="background-holder__content-text">
         <p>{{head}}</p>
       </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -20,11 +18,11 @@ export default {
 </script>
 <style  lang="scss" scoped>
 .background-holder__content {
-  background: url("../assets/back/kusa.png");
+  background: url("../assets/back/sakura2.jpg");
   background-size: cover;
   background-position: center center;
   width: 100%;
-  height: 20vh;
+  height: 15vh;
  
   &-text {
     color: block;

@@ -16,9 +16,7 @@
         >
           {{ menuItem.name }}
         </v-tab>
-        <v-tab @click="out">
-             ログアウト
-        </v-tab>
+        
       </v-tabs>
       
     </v-app-bar>
@@ -39,7 +37,6 @@
           >
             <v-list-item-title>{{ menuItem.name }}</v-list-item-title>
           </v-list-item>
-          
           <v-list-item @click="out">
             <v-list-item-title>
              ログアウト
@@ -53,7 +50,7 @@
  
 <script>
 import constants from '../common/constants'
-import axios from '@/api/index';
+import axios from "axios";
 
 export default {
   name: 'AppHeader',
@@ -66,8 +63,8 @@ export default {
   methods: {
     out() {
         console.log('aaaaaaaaaaa')
-        axios()
-          .delete("/auth/sign_out", {
+        axios
+          .delete("http://localhost:3000/v1/auth/sign_out", {
             headers: {
            'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),

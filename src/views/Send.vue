@@ -11,11 +11,10 @@
           item-value="id"
           :items="adress"
           label="宛先"
-          
           >
         </v-combobox>
       </v-row>
-   
+
       <v-row>
         <v-text-field
           v-model.number="time"

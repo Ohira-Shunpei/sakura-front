@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height class="login">
-    SAKURA TEST
+    SAKURA
   <v-form recontainerf="checkForm">
     <v-row>
         <v-text-field
@@ -30,8 +30,7 @@
 
 
 <script>
-import axios from '../api/index';
-
+import axios from "axios";
 export default {
   data() {
     return {
@@ -48,8 +47,8 @@ export default {
   },
   methods: {
     signUp() {
-      axios()
-        .post("/auth", {
+      axios
+        .post("http://localhost:3000/v1/auth", {
           email: this.email,
           password: this.password,
         })
@@ -65,6 +64,7 @@ export default {
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
           },
+          console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
         });
            this.$store.commit('setMessage', {
@@ -75,14 +75,15 @@ export default {
       
     },
     signIn() {
-     
-      axios()
-        .post("/auth/sign_in", {
+      console.log(this.email);
+      console.log(this.password);
+      axios
+        .post("http://localhost:3000/v1/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-        
+          console.log(response);
           localStorage.setItem(
             "access-token",
             response.headers["access-token"]
@@ -94,7 +95,7 @@ export default {
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
           },
-         
+          console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
           this.$store.commit('setMessage', {
           status: false,

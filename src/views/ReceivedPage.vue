@@ -1,27 +1,35 @@
 <template>
     <v-container>
-          
+        <v-card>
         <v-list>
+            <template  v-for="(message, index) in messages">
             <v-list-item
-                v-for="(message, index) in messages"
                 :key="index"
+                 @click='showMessage(message)'
             >
-                <v-row>
-                    <v-col sm=11>
-                        <v-list-item  @click='showMessage(message)'>
-                            {{ message.from }}さんからメッセージが届いています
-                        </v-list-item>
-                    </v-col>
-                    <v-col sm=1>    
-                        <v-btn @click="deleteMessage(message)" icon>
-                             <v-icon>
-                                mdi-delete
-                            </v-icon>   
-                        </v-btn>
-                    </v-col>
-                </v-row>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        {{ message.from }}さんからメッセージが届いています
+                    </v-list-item-title>
+                </v-list-item-content>
+        
+                <v-list-item-action>    
+                    <v-btn @click="deleteMessage(message)" icon>
+                            <v-icon>
+                            mdi-delete
+                        </v-icon>   
+                    </v-btn>
+                </v-list-item-action>
+                
             </v-list-item>
+            <v-divider
+                  v-if="index + 1 < messages.length" 
+                  :key="`divider-${index}`"
+                >
+                </v-divider>
+            </template>
         </v-list>
+        </v-card>
     </v-container>    
 </template>
 
@@ -47,7 +55,7 @@ import axios from '@/api/index'
        }
       )
       .then(response => (
-          console.log(response.data),
+          
           this.messages = response.data
           ))
         
