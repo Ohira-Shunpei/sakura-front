@@ -48,8 +48,7 @@ export default {
   },
   methods: {
     signUp() {
-      axios()
-        .post("/auth", {
+      axios().post("/auth", {
           email: this.email,
           password: this.password,
         })

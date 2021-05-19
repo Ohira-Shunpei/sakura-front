@@ -66,8 +66,7 @@ export default {
   methods: {
     out() {
         console.log('aaaaaaaaaaa')
-        axios()
-          .delete("/auth/sign_out", {
+        axios().delete("/auth/sign_out", {
             headers: {
            'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),
