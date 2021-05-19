@@ -50,7 +50,7 @@
  
 <script>
 import constants from '../common/constants'
-import axios from "axios";
+import axios from '@/api/index'
 
 export default {
   name: 'AppHeader',
@@ -64,7 +64,7 @@ export default {
     out() {
         console.log('aaaaaaaaaaa')
         axios
-          .delete("http://localhost:3000/v1/auth/sign_out", {
+          .delete("/auth/sign_out", {
             headers: {
            'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),

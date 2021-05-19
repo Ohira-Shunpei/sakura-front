@@ -30,7 +30,8 @@
 
 
 <script>
-import axios from "axios";
+import axios from '@/api/index'
+
 export default {
   data() {
     return {
@@ -48,7 +49,7 @@ export default {
   methods: {
     signUp() {
       axios
-        .post("http://localhost:3000/v1/auth", {
+        .post("/auth", {
           email: this.email,
           password: this.password,
         })
@@ -78,7 +79,7 @@ export default {
       console.log(this.email);
       console.log(this.password);
       axios
-        .post("http://localhost:3000/v1/auth/sign_in", {
+        .post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
