@@ -66,14 +66,18 @@ export default {
             client: response.headers["client"],
           },
           console.log(this.user),
+           console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
-        });
-           this.$store.commit('setMessage', {
+          this.$store.commit('setMessage', {
           status: false,
         })
-
-        this.$router.push({name: 'Home'})
-      
+          if (this.email == response.headers["uid"]){
+            this.$router.push({name: 'Home'})
+          }
+        });
+          
+     
+        
     },
     signIn() {
       console.log(this.email);

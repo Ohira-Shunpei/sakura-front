@@ -17,6 +17,9 @@
           {{ menuItem.name }}
         </v-tab>
         
+        <v-tab>
+          ログアウト
+        </v-tab>
       </v-tabs>
       
     </v-app-bar>
