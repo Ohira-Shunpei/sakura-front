@@ -82,8 +82,7 @@ export default {
     signIn() {
       console.log(this.email);
       console.log(this.password);
-      axios()
-        .post("/auth/sign_in", {
+      axios().post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
