@@ -1,19 +1,16 @@
-<!-- ページの記述 -->
 <template>
   <section class="home">
-    <!-- <Flash/> -->
     <HomeAbout/>
   </section>
 </template>
 
 <script>
 import HomeAbout from '../components/HomeAbout.vue'
-// import Flash from '../components/Flash.vue'
+
 
 export default {
   components: {
     HomeAbout,
-    // Flash
   },
 }
 </script>

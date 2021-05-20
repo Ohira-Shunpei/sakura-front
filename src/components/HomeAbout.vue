@@ -12,26 +12,26 @@
           <img src="../assets/img/post.jpg" width="400" height="300" >
         </v-col>
       </v-row>
-      <AppButton :button-text="buttonText" :url="url"/>
+      <!-- <AppButton :button-text="buttonText" :url="url"/> -->
     </v-container>
   </section>
 </template>
 
-<script>
-import AppButton from './AppButton.vue'
+// <script>
+// import AppButton from './AppButton.vue'
 
-export default {
-    data() {
-        return {
-            buttonText: 'メッセージを書く',
-            url: '/send'
-        }
-    },
-    components: {
-        AppButton
-    }
-}
-</script>
+// export default {
+//     data() {
+//         return {
+//             buttonText: 'メッセージを書く',
+//             url: '/send'
+//         }
+//     },
+//     components: {
+//         AppButton
+//     }
+// }
+// </script>
 
 <style lang="scss" scoped>
 .section__title {
