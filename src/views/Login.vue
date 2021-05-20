@@ -48,7 +48,8 @@ export default {
   },
   methods: {
     signUp() {
-      axios().post("/auth", {
+      axios()
+        .post("/auth", {
           email: this.email,
           password: this.password,
         })
@@ -74,14 +75,12 @@ export default {
             this.$router.push({name: 'Home'})
           }
         });
-          
-     
-        
     },
     signIn() {
       console.log(this.email);
       console.log(this.password);
-      axios().post("/auth/sign_in", {
+      axios()
+        .post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
