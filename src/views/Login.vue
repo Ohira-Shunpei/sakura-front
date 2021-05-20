@@ -97,7 +97,6 @@ export default {
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
           },
-          console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
           this.$store.commit('setMessage', {
           status: false,
