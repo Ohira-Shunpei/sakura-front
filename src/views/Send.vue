@@ -16,10 +16,36 @@
       </v-row>
 
       <v-row>
-        <v-text-field
-          v-model.number="time"
-          label="何分後"
-        ></v-text-field>
+        <v-col>
+          <v-text-field
+            v-model.number="year"
+            label="年"
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model.number="month"
+            label="月"
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model.number="day"
+            label="日"
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model.number="hour"
+            label="時"
+          ></v-text-field>
+        </v-col>
+        <v-col>
+          <v-text-field
+            v-model.number="minute"
+            label="分"
+          ></v-text-field>
+        </v-col>
       </v-row>
 
       <v-row>
@@ -44,7 +70,7 @@
       <v-row>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn text v-on:click="setPeople">送信する</v-btn>
+        <v-btn text v-on:click="sendMessage">送信する</v-btn>
         <!-- <span v-if="suceess">送信成功</span> -->
       </v-card-actions> 
       <!-- /送信ボタン -->
@@ -77,11 +103,15 @@ export default {
         '4',
         '5'
       ],
-      date: '2018-03-02',
       adress: [],
       select: [],
       to: [],
       body: [],
+      year: '',
+      month: '',
+      day: '',
+      hour: '',
+      minute: '',
       time: [],
       title: [],
       message: {},
@@ -108,7 +138,7 @@ export default {
       .then(response => (this.adress = response.data , console.log(response)))
   },
   methods: {
-      setPeople(){
+      sendMessage(){
       this.message.to = this.select.name
       this.adress.forEach(person => {
       if (person.email == localStorage.getItem("uid")) {
@@ -117,8 +147,9 @@ export default {
     });
       this.message.title = this.title
       this.message.body = this.body
-      this.message.time = this.time
-      console.log(this.message)
+      var date = new Date(this.year, this.month - 1, this.day, this.hour, this.minute)
+      this.message.time = date.getTime()
+      console.log(new Date())
       axios().post('/messages', this.message, {
         headers: {
            'access-token': localStorage.getItem('access-token'),

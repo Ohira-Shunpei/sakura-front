@@ -17,7 +17,7 @@
           {{ menuItem.name }}
         </v-tab>
         
-        <v-tab>
+        <v-tab @click="out">
           ログアウト
         </v-tab>
       </v-tabs>

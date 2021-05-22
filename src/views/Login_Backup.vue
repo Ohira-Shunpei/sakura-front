@@ -1,56 +1,28 @@
 <template>
   <v-container fluid fill-height class="login">
-  <v-row>
-    <v-container>
-      <img src="../assets/img/sakura-card.png" width="200" height="200">
-    </v-container>
-  </v-row>
-
+    SAKURA
   <v-form recontainerf="checkForm">
     <v-row>
-      <v-icon>
-        mdi-account
-      </v-icon>
-      <v-col>
-        <v-text-field
-        v-model="lastname"
-        label="性"
-        ></v-text-field>
-      </v-col>
-      <v-col>
-        <v-text-field
-        v-model="firstname"
-        label="名"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-icon>
-        mdi-email
-      </v-icon>
-      <v-col>
         <v-text-field
         v-model="email"
-        label="メールアドレス"
+        label="Email"
         ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>    
-      <v-icon>
-        mdi-key
-      </v-icon>
-      <v-col>
         <v-text-field
         v-model="password"
-        label="パスワード"
+        label="Password"
         ></v-text-field>
-      </v-col>
+        <v-btn class="mr-4" @click="signUp">新規登録</v-btn>
     </v-row>
     <v-row>
-      <v-col>
-        <v-btn class="mr-4" @click="signUp">新規登録</v-btn>
+        <v-text-field
+        v-model="email"
+        label="Email"
+        ></v-text-field>
+        <v-text-field
+        v-model="password"
+        label="Password"
+        ></v-text-field>
         <v-btn class="mr-4" @click="signIn">ログイン</v-btn>
-      </v-col>
     </v-row>
   </v-form>
   </v-container>
@@ -63,8 +35,6 @@ import axios from '@/api/index'
 export default {
   data() {
     return {
-      firstname: "",
-      lastname: "",
       name: "",
       email: "",
       password: "",
@@ -73,18 +43,15 @@ export default {
       tasks: [],
       comment: "",
       posts: [],
-      user: {},
+      user: {}
     };
   },
   methods: {
-    async signUp() {
-      this.name =this.lastname + " " +this.firstname
-      console.log(this.name)
-      await axios()
+    signUp() {
+      axios()
         .post("/auth", {
           email: this.email,
           password: this.password,
-          name: this.name
         })
         .then((response) => {
           localStorage.setItem(
@@ -93,39 +60,21 @@ export default {
           );
           localStorage.setItem("client", response.headers["client"]);
           localStorage.setItem("uid", response.headers["uid"]);
-          localStorage.setItem("id", response.data.data["id"]);
           this.user = {
             uid: response.headers["uid"],
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
-            id: response.data.data["id"],
           },
-        
           console.log(this.user),
+           console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
           this.$store.commit('setMessage', {
           status: false,
         })
-        }
-        );
-      this.id = localStorage.getItem('id')
-      console.log(this.id)
-      await axios().put('/users/' + this.id, {
-        email: this.email,
-        password: this.password,
-        name: this.name
-      },
-      {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-          },
-      }
-      )
-      if (this.email == localStorage.getItem("uid")){
+          if (this.email == response.headers["uid"]){
             this.$router.push({name: 'Home'})
-      }
+          }
+        });
     },
     signIn() {
       console.log(this.email);
@@ -136,6 +85,7 @@ export default {
           password: this.password,
         })
         .then((response) => {
+          console.log(response);
           localStorage.setItem(
             "access-token",
             response.headers["access-token"]
@@ -172,9 +122,10 @@ export default {
   font-weight: bold;
   letter-spacing: -4px;
   text-align: center;
+  background: linear-gradient(to bottom, #ece4d9 0%,#FF99CC 100%);
   position: absolute;
   padding: 300px 300px;
-  top: 20%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%,-50%);
   border-radius: 20px;
