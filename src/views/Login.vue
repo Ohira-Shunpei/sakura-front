@@ -2,7 +2,7 @@
   <v-container fluid fill-height class="login">
   <v-row>
     <v-container>
-      <img src="../assets/img/sakura-card.png" width="200" height="200">
+      <img src="../assets/img/sakura-card.png" width="300" height="300">
     </v-container>
   </v-row>
 
