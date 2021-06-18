@@ -15,6 +15,7 @@ export default new Vuex.Store({
       status: false,
       messasge: ''
     },
+    timeline: '' //プロフィール画面の一言
   },
   mutations: {
     USER_LOGIN(state, user_token) {
@@ -23,11 +24,18 @@ export default new Vuex.Store({
     setMessage(state, payload) { // 追加
       state.flash_message = payload
     },
+    editComment(state, timeline){
+      state.timeline = timeline
+    }
   },
   actions: {
     async userLogin({ commit }, user_token) {
       commit('USER_LOGIN', user_token)
       return user_token
+    },
+    async editComment({ commit }, timeline) {
+      commit('editComment', timeline)
+      return timeline
     },
   },
   plugins: [createPersistedState({})],

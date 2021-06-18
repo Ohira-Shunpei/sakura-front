@@ -1,59 +1,68 @@
 <template>
-  <v-container fluid fill-height class="login">
-  <v-row>
-    <v-container>
-      <img src="../assets/img/sakura-card.png" width="300" height="300">
-    </v-container>
-  </v-row>
+    <v-container fill-height class="login mt-5">
+      <v-row justify="center">
+          <img src="../assets/img/sakura-card.png" width="180" height="180">
+      </v-row>
 
-  <v-form recontainerf="checkForm">
-    <v-row>
-      <v-icon>
-        mdi-account
-      </v-icon>
-      <v-col>
-        <v-text-field
-        v-model="lastname"
-        label="性"
-        ></v-text-field>
-      </v-col>
-      <v-col>
-        <v-text-field
-        v-model="firstname"
-        label="名"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-icon>
-        mdi-email
-      </v-icon>
-      <v-col>
-        <v-text-field
-        v-model="email"
-        label="メールアドレス"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>    
-      <v-icon>
-        mdi-key
-      </v-icon>
-      <v-col>
-        <v-text-field
-        v-model="password"
-        label="パスワード"
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-btn class="mr-4" @click="signUp">新規登録</v-btn>
-        <v-btn class="mr-4" @click="signIn">ログイン</v-btn>
-      </v-col>
-    </v-row>
-  </v-form>
-  </v-container>
+      <v-container class="cont">
+        <v-form recontainerf="checkForm">
+          <v-row>
+            <v-icon>
+              mdi-account
+            </v-icon>
+            <v-col>
+              <v-text-field
+              v-model="lastname"
+              label="姓"
+              outlined
+              filled
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+              v-model="firstname"
+              label="名"
+              outlined
+              filled
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-icon>
+              mdi-email
+            </v-icon>
+            <v-col>
+              <v-text-field
+              v-model="email"
+              label="メールアドレス"
+              outlined
+              filled
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>    
+            <v-icon>
+              mdi-key
+            </v-icon>
+            <v-col>
+              <v-text-field
+              v-model="password"
+              type="password"
+              label="パスワード"
+              outlined
+              filled
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row class='mb-2'> 
+            <v-col>
+              <v-btn class="mr-6" @click="signUp">新規登録</v-btn>
+              <v-btn class="ml-6" @click="signIn">ログイン</v-btn>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-container>
+    </v-container>
 </template>
 
 
@@ -142,6 +151,7 @@ export default {
           );
           localStorage.setItem("client", response.headers["client"]);
           localStorage.setItem("uid", response.headers["uid"]);
+          localStorage.setItem("id", response.data.data["id"]);
           this.user = {
             uid: response.headers["uid"],
             "access-token": response.headers["access-token"],
@@ -163,20 +173,27 @@ export default {
 
 <style  lang="scss" scoped>
 .login {
+  background-image: url("~@/assets/back/login.png");
+  background-size: 95% 95%;
   font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
   text-transform: uppercase;
-  display: block;
-  font-size: 92px;
-  color: #f1ebe5;
-  text-shadow: 0 8px 9px #c4b59d, 0px -2px 1px #fff;
-  font-weight: bold;
-  letter-spacing: -4px;
-  text-align: center;
-  position: absolute;
-  padding: 300px 300px;
-  top: 20%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  border-radius: 20px;
+  // display: block;
+  // font-size: 92px;
+  // color: #f1ebe5;
+  // text-shadow: 0 8px 9px #c4b59d, 0px -2px 1px #fff;
+  // font-weight: bold;
+  // letter-spacing: -4px;
+  // text-align: center;
+  // position: absolute;
+  // padding: 300px 300px;
+  // top: 15%;
+  // left: 50%;
+  // transform: translate(-50%,-50%);
+  // border-radius: 20px;
 }
+
+  .cont {
+  // background-image: url("~@/assets/back/login.png");
+  width: 60%;
+  }
 </style>

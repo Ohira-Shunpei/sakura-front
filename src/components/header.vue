@@ -5,7 +5,7 @@
       dark
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title>サービス名</v-toolbar-title>
+      <v-toolbar-title>SAKURA</v-toolbar-title>
       <v-tabs
         dark
       >
@@ -54,7 +54,6 @@
 <script>
 import constants from '../common/constants'
 import axios from '@/api/index'
-
 export default {
   name: 'AppHeader',
   data () {
@@ -92,13 +91,11 @@ export default {
   margin-right: 50px !important;
 }
 @import 'src/styles/common/_mixin.scss';
-
 .v-app-bar__nav-icon {
   @include display_pc {
     display: none !important;
   }
 }
-
 .v-tabs {
   display: none;
  
@@ -106,6 +103,4 @@ export default {
     display: block !important;
   }
 }
-
 </style>
- 

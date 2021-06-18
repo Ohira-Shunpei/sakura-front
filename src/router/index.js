@@ -5,6 +5,12 @@ import Login from '../views/Login.vue'
 import Send from '../views/Send.vue'
 import Received from '../views/ReceivedPage.vue'
 import Message from '../views/Message.vue'
+import MessageContent from '../views/MessageContent.vue'
+import Profile from '../views/Profile.vue'
+import Test from '../views/Test.vue'
+import TimeLine from '../views/TimeLine.vue'
+import SendMessage from '../views/SendMessage.vue'
+import ShowRequest from '../views/ShowRequest.vue'
 
 Vue.use(VueRouter)
 
@@ -36,12 +42,34 @@ const routes = [
     component: Message
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
+  },
+  {
+    path: '/timeline',
+    name: 'TimeLine',
+    component: TimeLine
+  },
+  {
+    path: '/sendmessage',
+    name: 'SendMessage',
+    component: SendMessage
+  },
+  {
+    path: '/messagecontent',
+    name: 'MessageContent',
+    component: MessageContent
+  },
+  {
+    path: '/showrequest',
+    name: 'ShowRequest',
+    component: ShowRequest
   }
 ]
 

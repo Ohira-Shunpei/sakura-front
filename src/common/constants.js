@@ -11,7 +11,15 @@ export default {
       },
       {
         name: "メッセージ履歴",
-        url: "/received"
+        url: "/timeline"
+      },
+      {
+        name: "プロフィール",
+        url: "/profile"
+      },
+      {
+        name: "フレンド申請",
+        url: "/showrequest"
       },
     ]
 }
