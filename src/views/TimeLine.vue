@@ -11,7 +11,7 @@
             :dense="$vuetify.breakpoint.smAndDown"
           >
             <v-timeline-item
-              v-for="message in messages"
+              v-for="(message) in messages"
               :key="message.time"
               :color="message.color"
               small
@@ -23,7 +23,7 @@
                         <!-- <v-col cols='2'>
                             <v-avatar> 
                                 <img
-                                :src="message.avator"
+                                :src="users[index].avatar + railsURL"
                                 style="object-fit: cover;"
                                 >
                             </v-avatar> 
@@ -71,6 +71,8 @@ import axios from '@/api/index'
        
       ],
       dialog: false,
+      railsURL: "http://localhost:3000",
+      users: []
     
     }),
     methods: {
@@ -118,7 +120,8 @@ import axios from '@/api/index'
       },
       )
       .then(response => (
-        this.messages = response.data,
+        console.log(response),
+        this.messages = response.data.messages,
         this.messages.forEach(message =>
           console.log((message.time),
           japaneseTime = new Date(message.time * 1000),
@@ -128,7 +131,9 @@ import axios from '@/api/index'
           + ' ' + ('0' + japaneseTime.getHours()).slice(-2)
           + ':' + ('0' + japaneseTime.getMinutes()).slice(-2)
         )
-        )
+        ),
+        this.users = response.data.users,
+        console.log(this.users)
       ));
     
     await axios()

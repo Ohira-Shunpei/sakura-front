@@ -50,9 +50,9 @@ export default {
     created(){
         this.message_id = this.$route.params.message_id
     },
-    async mounted() {
+    mounted() {
         console.log(this.message_id)
-    await axios()
+    axios()
       .get('/users/' + localStorage.getItem('id') + '/messages/' + this.message_id,
       {
         headers: {

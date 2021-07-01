@@ -87,7 +87,7 @@ export default {
     }),
     async mounted() {
     await axios()
-      .get('/families/' + localStorage.getItem('id'),
+      .get('/family/' + localStorage.getItem('id'),
       {
         headers: {
            'access-token': localStorage.getItem('access-token'),
