@@ -28,61 +28,19 @@
                                 >
                             </v-avatar> 
                         </v-col> -->
-                        <v-col cols = '8'>
                             {{ message.time }}
-                        </v-col>
-                        <v-col cols='2'>
-                             <v-btn
-                                icon
-                                @click="dialog = true"
-                            >
-                            <v-icon> mdi-book </v-icon>
-                            </v-btn>
-                            <v-dialog
-                                :retain-focus="false"
-                                v-model="dialog"
-                                persistent
-                                max-width="600px"
-                                >
-                                <v-card>
-                                    <v-card-title>
-                                    <span class="headline">コメントする</span>
-                                    </v-card-title>
-                                    <v-card-text>
-                                    <v-container>
-                                      
-                                        <v-textarea
-                                        required
-                                        v-model='message.comment'
-                                        ></v-textarea>
-                                       
-                                    </v-container>
-                               
-                                    </v-card-text>
-                                    <v-card-actions>
-                                    <v-spacer></v-spacer>
-                                    <v-btn
-                                        color="blue darken-1"
-                                        text
-                                        @click="dialog = false"
-                                    >
-                                        Close
-                                    </v-btn>
-                                    <v-btn
-                                        icon
-                                        v-on:click="saveComment(), dialog = false"
-                                    >
-                                        <v-icon> mdi-check</v-icon>
-                                    </v-btn>
-                                    </v-card-actions>
-                                </v-card>
-                                </v-dialog>
-                           
-                        </v-col>
                     </v-card-title>
                     <v-card-text style="white-space:pre-wrap">
                         {{ message.title }}
                     </v-card-text>
+                    <v-card-actions>
+                      <v-btn @click='showContent(message)'>
+                        開く
+                      </v-btn>
+                      <v-btn @click='deleteMessage(message)'>
+                        削除
+                      </v-btn>
+                    </v-card-actions>
                         <v-divider/>
                     </div>
                 </v-card>
@@ -124,12 +82,33 @@ import axios from '@/api/index'
         lookComment(){
             console.log(this.messages)
         },
-        showMessage(){
-          this.$router.push({name: 'MessageContent'})
+        showContent(m){
+          console.log(m.id)
+          this.$router.push({
+            name: 'MessageContent',
+            params: {message_id: m.id}
+          })
+        },
+        deleteMessage(m){
+          axios().
+          delete('/messages/' + m.id,
+          {
+              headers: {
+                  'access-token': localStorage.getItem('access-token'),
+                  uid: localStorage.getItem('uid'),
+                  client: localStorage.getItem('client'),
+              },
+          },
+          ).then(response => {
+            console.log(response) 
+            this.$router.go({path: this.$router.currentRoute.path, force: true})
+          }).catch(e => {
+            console.log(e)
+          })
         }
     },
-    mounted() {
-    axios()
+    async mounted() {
+    await axios()
       .get('/users/' + localStorage.getItem('id') + '/messages',{
         headers: {
            'access-token': localStorage.getItem('access-token'),
@@ -140,8 +119,6 @@ import axios from '@/api/index'
       )
       .then(response => (
         this.messages = response.data,
-        console.log(this.messages),
-        console.log(this.messages.length),
         this.messages.forEach(message =>
           console.log((message.time),
           japaneseTime = new Date(message.time * 1000),
@@ -150,10 +127,20 @@ import axios from '@/api/index'
           + '/' + ('0' + japaneseTime.getDate()).slice(-2)
           + ' ' + ('0' + japaneseTime.getHours()).slice(-2)
           + ':' + ('0' + japaneseTime.getMinutes()).slice(-2)
-         
         )
         )
-      ))
+      ));
+    
+    await axios()
+      .get('users',{
+        headers: {
+           'access-token': localStorage.getItem('access-token'),
+            uid: localStorage.getItem('uid'),
+            client: localStorage.getItem('client'),
+        },
+      }).then(response=> (
+        console.log(response)
+      ))    
     }
   }
 </script>

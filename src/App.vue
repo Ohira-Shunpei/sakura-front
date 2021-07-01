@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <AppHeader v-if="$route.name !== 'Login'"></AppHeader>
-    <v-main   v-bind:class="{ bg: isActive }">
+    <v-main v-bind:class="{ bg: isActive }">
       <router-view/>
     </v-main>
-    <AppFooter v-if="$route.name !== 'Login'"></AppFooter>
+    <!-- <AppFooter v-if="$route.name !== 'Login'"></AppFooter> -->
   </v-app>
 </template>
 
 <script>
 import AppHeader from './components/header.vue'
-import AppFooter from './components/AppFooter.vue'
+// import AppFooter from './components/AppFooter.vue'
 export default {
   data: () => ({
         isActive: false
@@ -19,7 +19,7 @@ export default {
   
   components: {
     AppHeader,
-    AppFooter
+    // AppFooter
   },
   mounted: function() {
       if (this.$route.name != 'Login') {

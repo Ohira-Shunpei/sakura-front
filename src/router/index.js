@@ -2,15 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import Send from '../views/Send.vue'
+import SelectFriend from '../views/SelectFriend.vue'
 import Received from '../views/ReceivedPage.vue'
-import Message from '../views/Message.vue'
 import MessageContent from '../views/MessageContent.vue'
 import Profile from '../views/Profile.vue'
 import Test from '../views/Test.vue'
 import TimeLine from '../views/TimeLine.vue'
 import SendMessage from '../views/SendMessage.vue'
 import ShowRequest from '../views/ShowRequest.vue'
+
 
 Vue.use(VueRouter)
 
@@ -29,17 +29,12 @@ const routes = [
   {
     path: '/send',
     name: 'Send',
-    component: Send
+    component: SelectFriend
   },
   {
     path: '/received',
     name: 'Received',
     component: Received
-  },
-  {
-    path: '/message',
-    name: 'Message',
-    component: Message
   },
   {
     path: '/profile',

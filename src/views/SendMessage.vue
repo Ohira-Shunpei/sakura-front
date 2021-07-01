@@ -65,6 +65,17 @@
           </v-col>
         </v-row>
     </v-col>
+
+    <v-col>
+          <p>
+            <label>画像</label>
+            <input name="uploadedImage" type="file" ref="file" accept="image/png, image/jpeg" @change="onFileChange"><br />
+            <!-- <v-btn @click='postItem'>
+                アップロード
+            </v-btn> -->
+        </p>
+    </v-col>
+    
             
 </v-row>
 
@@ -101,15 +112,13 @@ import { mapState } from 'vuex'
 const year_start = 2021
 const year_end = 2100
 const ageRange = new Array(year_end - year_start + 1).fill(null).map((_, i) => i + year_start)
-
 const month_start = 1
 const month_end = 12
 const monthRange = new Array(month_end - month_start + 1).fill(null).map((_, i) => i + month_start)
-
-const daysRange = [...Array(31)].map((_, i) => i)
-
+const day_start = 1
+const day_end = 31
+const daysRange = new Array(day_end - day_start + 1).fill(null).map((_, i) => i + day_start)
 const hoursRange = [...Array(24)].map((_, i) => i) 
-
 const minutesRange = [...Array(60).keys()]
 
 export default {
@@ -143,7 +152,9 @@ export default {
       time: [],
       title: [],
       message: {},
-      user: ''
+      user: '',
+      uploadedImage: '',
+      railsURL: "http://localhost:3000"
     }
   },
   computed: {
@@ -164,14 +175,15 @@ export default {
   },
   methods: {
       sendMessage(){
-      this.message.to_id = this.select.id
-      this.message.from_id = localStorage.getItem('id')
-      this.message.title = this.title
-      this.message.body = this.body
       var date = new Date(this.year, this.month - 1, this.day, this.hour, this.minute)
-      this.message.time = date.getTime() / 1000
-      console.log(this.message)
-      axios().post('/users/' + localStorage.getItem('id') + '/messages', this.message, {
+      let formData = new FormData();
+      formData.append('image', this.uploadedImage);
+      formData.append('from_id', localStorage.getItem('id'));
+      formData.append('to_id', this.select.id);
+      formData.append('title', this.title);
+      formData.append('body', this.body);
+      formData.append('time', date.getTime() / 1000);
+      axios().post('/users/' + localStorage.getItem('id') + '/messages', formData, {
         headers: {
            'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),
@@ -180,11 +192,18 @@ export default {
       }
       )
       .then(response => ( 
-            console.log(response.data)
-            // this.$router.go({path: this.$router.currentRoute.path, force: true})
+            console.log(response.data),
+            this.$router.push({name: 'Send'})
         ))
 
     },
+    onFileChange(e) {
+        e.preventDefault();
+        let files = e.target.files;
+        this.uploadedImage = files[0];
+        console.log(files)
+        console.log(this.uploadedImage)
+     }
   },
 }
 </script>

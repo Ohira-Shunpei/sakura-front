@@ -2,7 +2,7 @@
     <v-container>
       <v-card class='mt-8'>
         <v-card-title>
-          ユーザ検索
+          家族を検索
         </v-card-title>
         <v-card-text>
           <v-text-field
@@ -19,7 +19,7 @@
         </v-card-actions>
         {{userSearched.name}}
         <!-- 田中太郎 -->
-        <v-btn v-if="userSearched.id > 0"  @click='followFeind(item.id)'>
+        <v-btn v-if="userSearched.id > 0"  @click='followFeind(userSearched.id)'>
           フォロー
         </v-btn>      
       </v-card>

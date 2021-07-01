@@ -3,7 +3,7 @@
     dark
   >
     <div class="footer">
-      SakuraProject
+      1st Prototype
     </div>
   </v-footer>
 </template>

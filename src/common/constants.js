@@ -6,11 +6,11 @@ export default {
         url: '/home'
       },
       {
-        name: "メッセージ送信",
+        name: "送信",
         url: "/send"
       },
       {
-        name: "メッセージ履歴",
+        name: "受信",
         url: "/timeline"
       },
       {
