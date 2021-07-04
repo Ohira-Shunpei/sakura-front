@@ -1,18 +1,6 @@
 <template>
   <v-container>
-     <v-row class='mt-5'>
-        <v-combobox
-          v-model='select'
-          item-text='name'
-          item-value="id"
-          :items="adress"
-          label="宛先"
-          outlined
-          >
-        </v-combobox>
-      </v-row>
-
-    <v-row justify="center" class='m'>
+    <v-row justify="center" class='mt-10'>
       <v-col cols="2">
         <v-avatar size='100'>
             <img src="~@/assets/icon/cat.jpg">
@@ -99,6 +87,7 @@
       </v-card-actions> 
       <!-- /送信ボタン -->
     </v-row>
+  
   </v-container>
 </template>
 
@@ -122,6 +111,7 @@ const hoursRange = [...Array(24)].map((_, i) => i)
 const minutesRange = [...Array(60).keys()]
 
 export default {
+  props: ['to_id'],
   data () {
     return {
       head: 'メッセージ送信',
@@ -135,7 +125,7 @@ export default {
         '4',
         '5'
       ],
-      adress: [],
+      user: [],
       select: '',
       to: '',
       body: '',
@@ -152,7 +142,6 @@ export default {
       time: [],
       title: [],
       message: {},
-      user: '',
       uploadedImage: '',
       railsURL: "http://localhost:3000"
     }
@@ -162,7 +151,7 @@ export default {
   },
   mounted() {
     axios()
-      .get('/users',{
+      .get('/users/' + this.to_id,{
         headers: {
            'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),
@@ -171,7 +160,7 @@ export default {
       },
       console.log(this.user_token)
       )
-      .then(response => (this.adress = response.data , console.log(response)))
+      .then(response => (this.user = response.data , console.log(response)))
   },
   methods: {
       sendMessage(){
@@ -179,7 +168,7 @@ export default {
       let formData = new FormData();
       formData.append('image', this.uploadedImage);
       formData.append('from_id', localStorage.getItem('id'));
-      formData.append('to_id', this.select.id);
+      formData.append('to_id', this.to_id);
       formData.append('title', this.title);
       formData.append('body', this.body);
       formData.append('time', date.getTime() / 1000);

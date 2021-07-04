@@ -29,7 +29,8 @@ const routes = [
   {
     path: '/send',
     name: 'Send',
-    component: SelectFriend
+    component: SelectFriend,
+    props: true
   },
   {
     path: '/received',
@@ -54,7 +55,8 @@ const routes = [
   {
     path: '/sendmessage',
     name: 'SendMessage',
-    component: SendMessage
+    component: SendMessage,
+    props: true
   },
   {
     path: '/messagecontent',

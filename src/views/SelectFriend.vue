@@ -105,7 +105,8 @@ export default {
   },
     methods: {
       editMessage() {
-        this.$router.push({name: 'SendMessage'})
+        console.log(this.select),
+        this.$router.push({name: 'SendMessage', params: {to_id: this.select.id}})
       },
       selectFrined(frined) {
         this.select = frined
