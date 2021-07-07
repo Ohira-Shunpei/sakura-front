@@ -10,6 +10,7 @@ import Test from '../views/Test.vue'
 import TimeLine from '../views/TimeLine.vue'
 import SendMessage from '../views/SendMessage.vue'
 import ShowRequest from '../views/ShowRequest.vue'
+import Sending from '../views/Sending.vue'
 
 
 Vue.use(VueRouter)
@@ -67,6 +68,11 @@ const routes = [
     path: '/showrequest',
     name: 'ShowRequest',
     component: ShowRequest
+  },
+  {
+    path: '/sending',
+    name: 'Sending',
+    component: Sending
   }
 ]
 

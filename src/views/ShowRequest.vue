@@ -17,11 +17,14 @@
             検索
           </v-btn>
         </v-card-actions>
+        <v-col>
         {{userSearched.name}}
-        <!-- 田中太郎 -->
-        <v-btn v-if="userSearched.id > 0"  @click='followFeind(userSearched.id)'>
-          フォロー
-        </v-btn>      
+        </v-col>
+        <v-col>
+          <v-btn v-if="userSearched.id > 0"  @click='followFeind(userSearched.id)'>
+            申請
+          </v-btn>   
+        </v-col>   
       </v-card>
 
        <v-card class='mt-8'>
@@ -151,7 +154,7 @@ export default {
         .then(response => (
             this.status = response.data.status, 
             console.log(response),
-             this.$router.go({path: this.$router.currentRoute.path, force: true})
+            this.$router.go({path: this.$router.currentRoute.path, force: true})
         ))
     },
     searchUser(){
@@ -169,7 +172,8 @@ export default {
         .then(response => (
             console.log(response),
             this.userSearched = response.data, 
-            console.log(this.userSearched)
+            console.log(this.userSearched),
+            this.$router.go({path: this.$router.currentRoute.path, force: true})
         ))
     },
     followFeind(id){

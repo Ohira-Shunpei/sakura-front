@@ -42,9 +42,7 @@
                       削除
                     </v-btn>
                   </v-card-actions>
-                
                 </v-card>
-              
             </v-timeline-item>
           </v-timeline>
         </v-card-text>
@@ -52,7 +50,7 @@
     </v-row>
     <v-btn
         icon
-        v-on:click="lookComment(), dialog = false"
+        @click="lookSending"
     >
         <v-icon> mdi-star</v-icon>
     </v-btn>
@@ -79,8 +77,8 @@ import axios from '@/api/index'
             console.log('aaaaa')
             console.log(this.messages)
         },
-        lookComment(){
-            console.log(this.messages)
+        lookSending(){
+            this.$router.push({name: "Sending"})
         },
         showContent(m, index){
           this.$router.push({
