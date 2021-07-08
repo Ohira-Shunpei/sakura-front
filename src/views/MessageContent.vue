@@ -49,7 +49,8 @@ export default {
       message_id: '',
       message: {},
       uploadedImage: '',
-      railsURL: "http://localhost:3000",
+      // railsURL: "http://localhost:3000",
+      railsURL: 'https://13.114.43.226',
       avatar_url: '',
     }),
     created(){

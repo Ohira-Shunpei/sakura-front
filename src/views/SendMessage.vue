@@ -15,7 +15,7 @@
         ></v-text-field>
         </div>
         <v-row>
-          <v-col>
+          <v-col cols='4'>
             <v-select
               v-model="year"
               :items="yearrange"
