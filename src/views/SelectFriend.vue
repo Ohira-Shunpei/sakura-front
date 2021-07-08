@@ -6,12 +6,10 @@
       height='100%'
     >
       <v-list dense>
-        
         <v-subheader class='text-h5'>送信相手</v-subheader>
         <v-divider/>
         <v-list-item-group
           color="primary"
-          
         >
           <v-list-item
             v-for="(item, i) in frineds"
@@ -101,7 +99,6 @@ export default {
             this.frineds = response.data
     )
     );
-    
   },
     methods: {
       editMessage() {
