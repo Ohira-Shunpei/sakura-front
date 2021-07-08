@@ -226,7 +226,8 @@ export default {
       comment: '卒業まであとわずか．\n２月にイタリアへの卒業旅行，ちゃんと行けるかなー',
       post: {},
       uploadedImage: '',
-      railsURL: 'https://13.114.43.226/v1'
+      railsURL: 'https://13.114.43.226'
+      // railsURL: "http://localhost:3000"
     }),
 
     async mounted() {
