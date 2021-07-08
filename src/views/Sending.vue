@@ -35,7 +35,7 @@ export default {
     data: () => ({
       messages: [],
       dialog: false,
-      railsURL: "http://localhost:3000",
+      railsURL: 'https://13.114.43.226/v1',
       user_names: [],
       users: [],
       avatar_urls: [],
