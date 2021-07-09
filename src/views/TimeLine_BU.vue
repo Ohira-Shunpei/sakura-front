@@ -2,38 +2,49 @@
     <v-container >
        <v-row justify="space-around">
         <v-card-text>
-           <v-layout wrap>
-              <v-flex v-for="(message, index) in messages" :key="message.time" xs12 md6 lg3>
-                <v-card>
-                    <v-row>
-                      <v-col cols='2'>
-                          <v-avatar> 
-                              <img
-                              :src="railsURL + avatar_urls[index]"
-                              style="object-fit: cover;"
-                              >
-                          </v-avatar> 
-                      </v-col>
-                      <v-col cols='10'>
-                        <v-card-subtitle>
-                          {{message.time}} ← {{message.created_time}}
-                        </v-card-subtitle>
-                      </v-col>
-                    </v-row>
-                    <v-card-title class="justify-center">
-                        {{message.title}}
-                    </v-card-title>
-                    <v-card-actions>
-                      <v-btn @click='showContent(message, index)'>
-                        開く
-                      </v-btn>
-                      <v-btn @click='deleteMessage(message)'>
-                        削除
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-              </v-flex>
-           </v-layout>
+          <div class="font-weight-bold">
+            2021
+          </div>
+          <v-timeline
+            align-top
+            :dense="$vuetify.breakpoint.smAndDown"
+          >
+            <v-timeline-item
+              v-for="(message, index) in messages"
+              :key="message.time"
+              :color="message.color"
+              small
+            >
+              <v-card>
+                  <v-row>
+                    <v-col cols='2'>
+                        <v-avatar> 
+                            <img
+                            :src="railsURL + avatar_urls[index]"
+                            style="object-fit: cover;"
+                            >
+                        </v-avatar> 
+                    </v-col>
+                    <v-col cols='10'>
+                      <v-card-subtitle>
+                        {{message.time}} ← {{message.created_time}}
+                      </v-card-subtitle>
+                    </v-col>
+                  </v-row>
+                   <v-card-title class="justify-center">
+                      {{message.title}}
+                  </v-card-title>
+                  <v-card-actions>
+                    <v-btn @click='showContent(message, index)'>
+                      開く
+                    </v-btn>
+                    <v-btn @click='deleteMessage(message)'>
+                      削除
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+            </v-timeline-item>
+          </v-timeline>
         </v-card-text>
       
     </v-row>

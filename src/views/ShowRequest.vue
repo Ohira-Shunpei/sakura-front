@@ -2,7 +2,7 @@
     <v-container>
       <v-card class='mt-8'>
         <v-card-title>
-          家族を検索
+          大切な人を検索
         </v-card-title>
         <v-card-text>
           <v-text-field
@@ -28,7 +28,7 @@
       </v-card>
        <v-card class='mt-8'>
          <v-card-title>
-           フレンド申請中
+           申請中
          </v-card-title>
         <v-list>
           <v-list-item
@@ -51,7 +51,7 @@
 
       <v-card class='mt-8'>
         <v-card-title>
-          申請されいているフレンド
+          保留中
         </v-card-title>
         <v-list>
           <v-list-item

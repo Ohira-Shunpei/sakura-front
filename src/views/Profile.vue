@@ -55,8 +55,11 @@
                 <v-row>
                     <div v-if="profile.birthdate">
                     <v-card-subtitle>
-                        {{profile.birthdate}}
+                        生年月日
                     </v-card-subtitle>
+                    <v-card-text>
+                        {{profile.birthdate}}
+                    </v-card-text>
                     <v-card-actions>
                     <v-btn
                             @click="dialog = true"
@@ -227,7 +230,7 @@ export default {
       post: {},
       uploadedImage: '',
       railsURL: 'https://13.114.43.226'
-      // railsURL: "http://localhost:3000"
+    //   railsURL: "http://localhost:3000"
     }),
 
     async mounted() {
