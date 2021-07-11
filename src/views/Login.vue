@@ -1,8 +1,10 @@
 <template>
-        <v-container>
-            <v-row justify="center" class="mt-5">
-                <img src="../assets/img/sakura-logo.png" width="180" height="180">
-            </v-row>
+    <v-container>
+        <v-row justify="center" class="mt-5">
+            <img src="../assets/img/sakura-logo.png" width="180" height="180">
+        </v-row>
+        <v-layout wrap class='justify-center'>
+          <v-flex xs12 sm10 md8>
             <v-row class="ml-3 mr-3 mt-7">
                 <v-col>
                     <v-text-field
@@ -37,7 +39,7 @@
                     ></v-text-field>
                 </v-col>
             </v-row>
-             <v-row class="ml-3 mr-3 mt-n7"> 
+              <v-row class="ml-3 mr-3 mt-n7"> 
                 <v-col>
                     <v-text-field
                         v-model="password"
@@ -49,43 +51,45 @@
                         background-color="grey lighten-5"
                     ></v-text-field>
                 </v-col>
-             </v-row>
-            <div class="text-center">
-                <v-row class="mt-n5" align="center"> 
-                    <v-col>
-                        <v-btn
-                            depressed
-                            rounded
-                            color="blue lighten-3"
-                            x-large
-                            @click="signIn"
-                        >
-                            ログイン
-                        </v-btn>
-                    </v-col>
-                </v-row>
-                <v-row class="mt-n1" align="center"> 
-                    <v-col>
-                        <v-btn
-                            depressed
-                            rounded
-                            color="grey lighten-2"
-                            x-large
-                            @click="signUp"
-                        >
-                            新規ユーザー登録
-                        </v-btn>
-                    </v-col>
-                </v-row>
-                <v-row>
-                  <v-switch
-                    v-model="auto"
-                    class="ma-1"
-                    label="次回から自動ログインする"
-                  ></v-switch>
-                </v-row>
-            </div>
-        </v-container>
+              </v-row>
+          </v-flex>
+        </v-layout>
+        <div class="text-center">
+            <v-row class="mt-n5" align="center"> 
+                <v-col>
+                    <v-btn
+                        depressed
+                        rounded
+                        color="blue lighten-3"
+                        x-large
+                        @click="signIn"
+                    >
+                        ログイン
+                    </v-btn>
+                </v-col>
+            </v-row>
+            <v-row class="mt-n1" align="center"> 
+                <v-col>
+                    <v-btn
+                        depressed
+                        rounded
+                        color="grey lighten-2"
+                        x-large
+                        @click="signUp"
+                    >
+                        新規ユーザー登録
+                    </v-btn>
+                </v-col>
+            </v-row>
+            <v-row class='justify-center'>
+              <v-switch
+                v-model="auto"
+                class="ma-1"
+                label="次回から自動ログインする"
+              ></v-switch>
+            </v-row>
+        </div>
+    </v-container>
 </template>
 
 <script>

@@ -57,8 +57,8 @@ import axios from '@/api/index'
     data: () => ({
       messages: [],
       dialog: false,
-      railsURL: "http://localhost:3000",
-      // railsURL: 'https://13.114.43.226',
+      // railsURL: "http://localhost:3000",
+      railsURL: 'https://13.114.43.226',
       users: [],
       avatar_urls: [],
       users_name: []

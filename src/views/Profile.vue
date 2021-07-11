@@ -1,13 +1,14 @@
 <template>
     <v-container fluid fill-height class='bg'>
-        <v-col>           
+        <v-layout wrap class='justify-center align-center'>
+            <v-flex xs12 sm6 md4>
             <v-card
-               class="mx-auto"
-                max-width="400"
+                class="mx-auto"
+             
             >
                 <v-img
                 v-bind:src="railsURL + profile.avatar"
-                height="300px"
+                max-height="300px"
                 >
                     <v-card-actions>
                         <v-btn
@@ -27,7 +28,7 @@
                                     プロフィール画像を変更
                                 </v-card-title>
                                 <input name="uploadedImage" type="file" ref="file" accept="image/png, image/jpeg" @change="onFileChange"><br />
-    
+
                                 <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn icon @click='postItem'>
@@ -48,81 +49,86 @@
                         </v-dialog>
                     </v-card-actions>
                 </v-img>
-               
+                <v-container>
                 <v-card-title>
                     {{profile.name}}
                 </v-card-title>
-                <v-row>
-                    <div v-if="profile.birthdate">
-                    <v-card-subtitle>
-                        生年月日
-                    </v-card-subtitle>
-                    <v-card-text>
-                        {{profile.birthdate}}
-                    </v-card-text>
-                    <v-card-actions>
-                    <v-btn
-                            @click="dialog = true"
-                        >
-                            変更
-                        </v-btn>
-                        <v-dialog
-                            v-model="dialog"
-                            persistent
+               
+                <div v-if="profile.birthdate">
+                    <v-row>
+                        <v-card-subtitle>
+                            生年月日
+                        </v-card-subtitle>
+                    </v-row>
+                    <v-row>  
+                        <v-col>
+                            {{profile.birthdate}}
+                        </v-col>
+                        <v-col>
+                            <v-btn
+                                @click="dialog = true"
+                                depressed
                             >
-                            <v-card>
-                                <v-card-title>
-                                <span class="headline">生年月日</span>
-                                </v-card-title>
-                                <v-card-text>
-                                <v-container>
-                                     <v-row>
-                                    <v-col>
-                                        <v-select
-                                        v-model="year"
-                                        :items="yearrange"
-                                        label="年"
-                                        ></v-select>
-                                    </v-col>
-                                    
-                                    <v-col>
-                                        <v-select
-                                        v-model="month"
-                                        :items="monthrange"
-                                        label="月"
-                                        ></v-select>
-                                    </v-col>
-                                    <v-col>
-                                        <v-select
-                                        v-model="day"
-                                        :items="daysrange"
-                                        label="日"
-                                        ></v-select>
-                                    </v-col>
-                                    </v-row>
-                                </v-container>
-                            
-                                </v-card-text>
-                                <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                    color="blue darken-1"
-                                    text
-                                    @click="dialog = false"
-                                >
-                                    Close
-                                </v-btn>
-                                <v-btn
-                                    icon
-                                    dialog = "false"
-                                    @click='registerBirthdate'
-                                >
-                                    <v-icon> mdi-check</v-icon>
-                                </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
+                                    変更
+                            </v-btn>
+                        </v-col>
+                    <v-dialog
+                        v-model="dialog"
+                        persistent
+                        >
+                        <v-card>
+                            <v-card-title>
+                            <span class="headline">生年月日</span>
+                            </v-card-title>
+                            <v-card-text>
+                            <v-container>
+                                <v-row>
+                                <v-col>
+                                    <v-select
+                                    v-model="year"
+                                    :items="yearrange"
+                                    label="年"
+                                    ></v-select>
+                                </v-col>
+                                
+                                <v-col>
+                                    <v-select
+                                    v-model="month"
+                                    :items="monthrange"
+                                    label="月"
+                                    ></v-select>
+                                </v-col>
+                                <v-col>
+                                    <v-select
+                                    v-model="day"
+                                    :items="daysrange"
+                                    label="日"
+                                    ></v-select>
+                                </v-col>
+                                </v-row>
+                            </v-container>
+                        
+                            </v-card-text>
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                                color="blue darken-1"
+                                text
+                                @click="dialog = false"
+                            >
+                                Close
+                            </v-btn>
+                            <v-btn
+                                icon
+                                dialog = "false"
+                                @click='registerBirthdate'
+                            >
+                                <v-icon> mdi-check</v-icon>
+                            </v-btn>
                         </v-card-actions>
+                    </v-card>
+                    </v-dialog>
+                    </v-row>
                     </div>
                     <div v-else>
                         <v-card-subtitle>
@@ -144,7 +150,7 @@
                                 </v-card-title>
                                 <v-card-text>
                                 <v-container>
-                                     <v-row>
+                                        <v-row>
                                     <v-col>
                                         <v-select
                                         v-model="year"
@@ -192,9 +198,10 @@
                         </v-dialog>
                         </v-card-actions>
                     </div>
-                </v-row>
+                </v-container>
             </v-card>
-        </v-col>
+            </v-flex>
+        </v-layout>
     </v-container>
 </template>
 

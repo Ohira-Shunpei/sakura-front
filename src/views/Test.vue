@@ -1,9 +1,8 @@
 <template>
   <v-layout wrap>
     <v-flex v-for="message in messages" :key="message.to_data" xs12 md6 lg3>
-      <v-card
-        
-      >
+      <v-card>
+
         <v-card-title> 
           {{message.name}} 
         </v-card-title> 
