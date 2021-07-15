@@ -159,7 +159,7 @@ export default {
       }
       )
       if (this.email == localStorage.getItem("uid")){
-            this.$router.push({name: 'Home'})
+            this.$router.push({name: 'TimeLine'})
       }
     },
     signIn() {
@@ -188,7 +188,7 @@ export default {
           status: false,
         })
           if (this.email == response.headers["uid"]){
-            this.$router.push({name: 'Home'})
+            this.$router.push({name: 'TimeLine'})
           }
         });    
     },

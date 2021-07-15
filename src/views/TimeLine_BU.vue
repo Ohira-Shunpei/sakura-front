@@ -1,5 +1,17 @@
 <template>
     <v-container >
+      <v-row class='mt-3 ml-3'>
+        <p class="text-h6"> タイムライン </p>
+    </v-row>
+      <v-row class='mr-2'>
+      <v-col cols='1'>
+        <v-btn icon @click='returnPage'>
+          <v-icon>
+            mdi-arrow-left-thick
+          </v-icon>
+        </v-btn>
+      </v-col>
+      </v-row>
        <v-row justify="space-around">
         <v-card-text>
           <div class="font-weight-bold">
@@ -68,8 +80,8 @@ import axios from '@/api/index'
     data: () => ({
       messages: [],
       dialog: false,
-    //   railsURL: "http://localhost:3000",
-      railsURL: 'https://13.114.43.226',
+      railsURL: "http://localhost:3000",
+      // railsURL: 'https://13.114.43.226',
       users: [],
       avatar_urls: [],
       users_name: []
@@ -104,7 +116,10 @@ import axios from '@/api/index'
           }).catch(e => {
             console.log(e)
           })
-        }
+        },
+        returnPage() {
+        this.$router.push({name: 'Home'})
+      }
     },
     async mounted() {
       await axios()

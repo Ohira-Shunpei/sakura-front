@@ -1,32 +1,22 @@
 <template>
     <v-container fluid fill-height class='bg'>
-        <v-row class='mt-3 ml-3'><p class="text-h6"> プロフィール </p></v-row>
-        <v-row class='mr-2 mt-0 mb-0'>
-            <v-col cols='1'>
-                <v-btn icon @click='returnPage'>
-                <v-icon>
-                    mdi-arrow-left-thick
-                </v-icon>
-                </v-btn>
-            </v-col>
-            <v-col cols='10'></v-col>
-            <v-col cols='1'>
-                <v-btn @click='editProfile' icon>
-                    <v-icon> mdi-pen </v-icon>
-                </v-btn>
-            </v-col>
-        </v-row>
-        <v-layout wrap class='justify-center'>
+        <v-layout wrap class='justify-center align-center'>
             <v-flex xs12 sm9 md6>
-            <v-divider class='mt-0'/>
-            <v-row justify="center" class="mb-5 mt-5">
-                <v-avatar size='100'>
-                    <v-img
-                    v-bind:src="railsURL + profile.avatar"
-                    >
-                    </v-img>
-                </v-avatar>
-            </v-row>
+                <v-row>
+                    <v-btn icon @click='returnPage'>
+                        <v-icon>
+                            mdi-arrow-left-thick
+                        </v-icon>
+                    </v-btn>
+                </v-row>
+                <v-row justify="center" class="mb-5 mt-5">
+                        <v-avatar size='100'>
+                            <v-img
+                            v-bind:src="railsURL + profile.avatar"
+                            >
+                            </v-img>
+                        </v-avatar>
+                </v-row>
             <v-card
                 height = "450"
                 rounded="xl"
@@ -53,7 +43,7 @@
                                 </template>
                             </v-list>
                         </v-col>
-                    </v-row>  
+                    </v-row>              
                 </v-container>
             </v-card>
             </v-flex>
@@ -66,6 +56,7 @@ import axios from '@/api/index'
 // import { mapState } from 'vuex'
 
 export default {
+    props: ['profile_id'],
     data: () => ({
 
       profile:{
@@ -79,9 +70,10 @@ export default {
       railsURL: 'https://13.114.43.226'
     //   railsURL: "http://localhost:3000"
     }),
+
     async mounted() {
     await axios()
-      .get('/profile/' + localStorage.getItem('id'),
+      .get('/profile/' + this.profile_id,
       {
         headers: {
            'access-token': localStorage.getItem('access-token'),
@@ -102,16 +94,10 @@ export default {
     );
   },
   methods: {
-      editProfile(){
-          console.log(this.profile.avatar)
-          console.log(this.items['Name'])
-          console.log(this.items['Date of birth'])
-          this.$router.push({name: 'ProfileEdit'})
-      },
       returnPage(){
-        this.$router.push({name: 'TimeLine'})
-    }
-    }
+        this.$router.push({name: 'Send'})
+        }
+  }
 }
 </script>
 

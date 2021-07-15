@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppHeader v-if="$route.name !== 'Login'"></AppHeader>
+    <!-- <AppHeader v-if="$route.name !== 'Login'"></AppHeader> -->
     <v-main class='v-application'>
       <router-view/>
     </v-main>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import AppHeader from './components/header.vue'
+// import AppHeader from './components/header.vue'
 // import AppFooter from './components/AppFooter.vue'
 export default {
   data: () => ({
@@ -18,7 +18,7 @@ export default {
   name: 'App',
   
   components: {
-    AppHeader,
+    // AppHeader,
     // AppFooter
   },
   mounted: function() {
@@ -33,5 +33,8 @@ export default {
 <style scoped>
 .v-application {
   background-color: #fff4f6;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 </style>

@@ -1,9 +1,17 @@
 <template>
     <v-container>
+      <v-row class='mt-3 ml-3'>
+          <p class="text-h6"> 大切な人を検索 </p>
+      </v-row>
+      <v-row>
+          <v-btn icon @click='returnPage'>
+              <v-icon>
+                  mdi-arrow-left-thick
+              </v-icon>
+          </v-btn>
+      </v-row>
+      <v-divider class='mt-4'/>
       <v-card class='mt-8'>
-        <v-card-title>
-          大切な人を検索
-        </v-card-title>
         <v-card-text>
           <v-text-field
             outlined
@@ -194,6 +202,9 @@ export default {
         this.$router.push({name: 'Home'})
       ))
     },
+    returnPage() {
+      this.$router.push({name: 'Send'})
+    }
   },
 }
 </script>
