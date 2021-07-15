@@ -293,7 +293,7 @@ export default {
         .then(response => (
             console.log(response),
             // this.$router.go({path: this.$router.currentRoute.path, force: true})
-            this.$router.push({name: 'Home'})  
+            this.$router.push({name: 'Profile'})  
         ))
       },
     onFileChange(e) {
@@ -325,7 +325,7 @@ export default {
           this.profile.avatar = response.data.avatar,
           console.log(response) ,
         //   this.$router.go({path: this.$router.currentRoute.path, force: true})
-            this.$router.push({name: 'Home'})  
+            this.$router.push({name: 'Profile'})  
         }).catch(e => {
           console.log(e)
         })
