@@ -249,7 +249,7 @@
                 <v-btn
                     icon
                     dialog_0 = "false"
-                    @click='registerBirthdate'
+                    @click='changeName'
                 >
                     <v-icon> mdi-check</v-icon>
                 </v-btn>
@@ -340,6 +340,27 @@ export default {
             this.$router.push({name: 'Profile'})  
         ))
       },
+    changeName(){
+        this.name =this.lastname + " " +this.firstname
+        axios()
+        .put('/users/' + localStorage.getItem('id'),
+        {
+            name: this.name
+        },
+        {
+            headers: {
+                'access-token': localStorage.getItem('access-token'),
+                uid: localStorage.getItem('uid'),
+                client: localStorage.getItem('client'),
+            },
+        },
+        )
+        .then(response => (
+            console.log(response),
+            // this.$router.go({path: this.$router.currentRoute.path, force: true})
+            this.$router.push({name: 'Profile'})  
+        ))
+    },
     onFileChange(e) {
         e.preventDefault();
         let files = e.target.files;
