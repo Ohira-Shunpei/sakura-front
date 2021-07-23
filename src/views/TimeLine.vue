@@ -21,15 +21,25 @@
           <v-col cols='2'>
             <v-btn icon @click='showFriend'>
                 <v-icon large>
-                    mdi-account-outline
+                    mdi-account-multiple-outline
                 </v-icon>
             </v-btn>
           </v-col>
-          <v-col cols='2'>
+          <v-col v-if="myavatar" cols='2'>
             <v-btn icon @click='showProfile'>
                 <v-avatar size='30'>
                   <v-img
                   v-bind:src="railsURL + myavatar"
+                  >
+                  </v-img>
+                </v-avatar>
+            </v-btn>
+          </v-col>
+          <v-col v-else cols='2'>
+            <v-btn icon @click='showProfile'>
+                <v-avatar size='30'>
+                  <v-img
+                  src="@/assets/icon/kame.jpg"
                   >
                   </v-img>
                 </v-avatar>
@@ -50,8 +60,8 @@
           >
             <v-img
               src='@/assets/icon/kame.jpg'
-              max-height="60"
-              max-width="60"
+              max-height="100"
+              max-width="100"
             >
             </v-img>
           </v-badge>
@@ -64,8 +74,8 @@
           >
             <v-img
               src='@/assets/icon/kame.jpg'
-              max-height="60"
-              max-width="60"
+              max-height="100"
+              max-width="100"
             >
             </v-img>
           </v-badge>
@@ -182,7 +192,7 @@ import axios from '@/api/index'
               // this.profile.name = response.data.name, 
               this.myavatar = response.data.avatar_url, 
               // this.profile.birthdate = response.data.birthdate,
-              console.log(this.items)
+              console.log(this.myavatar)
       )
       );
       await axios()

@@ -98,8 +98,8 @@ export default {
       },
       )
       .then(response => (
-            console.log(response.data),
-            this.frineds = response.data
+            console.log(response),
+            this.frineds = response.data.friends
     )
     );
   },

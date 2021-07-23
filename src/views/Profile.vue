@@ -19,10 +19,18 @@
         <v-layout wrap class='justify-center'>
             <v-flex xs12 sm9 md6>
             <v-divider class='mt-0'/>
-            <v-row justify="center" class="mb-5 mt-5">
+            <v-row v-if="profile.avatar" justify="center" class="mb-5 mt-5">
                 <v-avatar size='100'>
                     <v-img
                     v-bind:src="railsURL + profile.avatar"
+                    >
+                    </v-img>
+                </v-avatar>
+            </v-row>
+            <v-row v-else justify="center" class="mb-5 mt-5">
+                <v-avatar size='100'>
+                    <v-img
+                    src="@/assets/icon/kame.jpg"
                     >
                     </v-img>
                 </v-avatar>

@@ -12,8 +12,8 @@
         </v-row>
         <v-layout wrap class='justify-center'>
             <v-flex xs12 sm9 md6>
-                <v-divider class='mt-4'/>
-                <v-row justify="center" class='mt-10 mb-15'>
+                <v-divider class='mt-5'/>
+                <v-row v-if='profile.avatar' justify="center" class='mt-10 mb-15'>
                         <v-btn
                             icon
                             @click="dialog_avatar = true"
@@ -56,6 +56,14 @@
                             </v-card>
                         </v-dialog>
                     </v-row>
+                    <v-row v-else justify="center" class="mb-5 mt-5">
+                <v-avatar size='100'>
+                    <v-img
+                    src="@/assets/icon/kame.jpg"
+                    >
+                    </v-img>
+                </v-avatar>
+            </v-row>
                     <v-card
                         height = "450"
                         rounded="xl"
