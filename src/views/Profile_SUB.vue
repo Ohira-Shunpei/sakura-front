@@ -235,8 +235,8 @@ export default {
       dialog_avatar: false,
       post: {},
       uploadedImage: '',
-    //   railsURL: 'https://13.114.43.226'
-      railsURL: "http://localhost:3000"
+      railsURL: 'https://13.114.43.226'
+    //   railsURL: "http://localhost:3000"
     }),
 
     async mounted() {

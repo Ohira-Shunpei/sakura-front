@@ -14,106 +14,142 @@
             <v-flex xs12 sm9 md6>
                 <v-divider class='mt-5'/>
                 <v-row v-if='profile.avatar' justify="center" class='mt-10 mb-15'>
-                        <v-btn
-                            icon
-                            @click="dialog_avatar = true"
-                        >
-                            <v-avatar size='100'>
-                                <v-img
-                                v-bind:src="railsURL + profile.avatar"
-                                >
-                                </v-img>
-                            </v-avatar>
-                        </v-btn>
-                        <v-dialog
-                            :retain-focus="false"
-                            v-model="dialog_avatar"
-                            persistent
-                            max-width="600px"
+                    <v-btn
+                        icon
+                        @click="dialog_avatar = true"
+                    >
+                        <v-avatar size='100'>
+                            <v-img
+                            v-bind:src="railsURL + profile.avatar"
                             >
-                            <v-card>
-                                <v-card-title>
-                                    プロフィール画像を変更
-                                </v-card-title>
-                                <input name="uploadedImage" type="file" ref="file" accept="image/png, image/jpeg" @change="onFileChange"><br />
+                            </v-img>
+                        </v-avatar>
+                    </v-btn>
+                    <v-dialog
+                        :retain-focus="false"
+                        v-model="dialog_avatar"
+                        persistent
+                        max-width="600px"
+                        >
+                        <v-card>
+                            <v-card-title>
+                                プロフィール画像を変更
+                            </v-card-title>
+                            <input name="uploadedImage" type="file" ref="file" accept="image/png, image/jpeg" @change="onFileChange"><br />
 
-                                <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click='postItem'>
-                                    <v-icon>
-                                        mdi-book
-                                    </v-icon>
-                                </v-btn>
-                                <v-btn
-                                    @click="dialog_avatar = false"
-                                    icon
-                                >
-                                    <v-icon>
-                                        mdi-close
-                                    </v-icon>
-                                </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-dialog>
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn icon @click='postItem'>
+                                <v-icon>
+                                    mdi-book
+                                </v-icon>
+                            </v-btn>
+                            <v-btn
+                                @click="dialog_avatar = false"
+                                icon
+                            >
+                                <v-icon>
+                                    mdi-close
+                                </v-icon>
+                            </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+                <v-row v-else justify="center" class='mt-10 mb-15'>
+                    <v-btn
+                        icon
+                        @click="dialog_avatar = true"
+                    >
+                        <v-avatar size='100'>
+                            <v-img
+                            src="@/assets/icon/kame.jpg"
+                            >
+                            </v-img>
+                        </v-avatar>
+                    </v-btn>
+                    <v-dialog
+                        :retain-focus="false"
+                        v-model="dialog_avatar"
+                        persistent
+                        max-width="600px"
+                        >
+                        <v-card>
+                            <v-card-title>
+                                プロフィール画像を変更
+                            </v-card-title>
+                            <input name="uploadedImage" type="file" ref="file" accept="image/png, image/jpeg" @change="onFileChange"><br />
+
+                            <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn icon @click='postItem'>
+                                <v-icon>
+                                    mdi-book
+                                </v-icon>
+                            </v-btn>
+                            <v-btn
+                                @click="dialog_avatar = false"
+                                icon
+                            >
+                                <v-icon>
+                                    mdi-close
+                                </v-icon>
+                            </v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+
+            <v-card
+                height = "450"
+                rounded="xl"
+            >
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <v-list two-line>
+                                <template v-for="(item, key, index) in items">
+                                    <v-list-item :key = key>
+                                        <v-list-item-content>
+                                            <v-list-item-title>
+                                                {{key}}
+                                            </v-list-item-title>
+                                            <v-row>
+                                                <v-col cols="9">
+                                                    <v-list-item-subtitle>
+                                                        {{item}}
+                                                    </v-list-item-subtitle>
+                                                </v-col>
+                                                <v-col>  
+                                                    <div v-if='index === 0'>                                              
+                                                        <v-btn icon @click='dialog_0 = true'>
+                                                            <v-icon>
+                                                                mdi-pen
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </div>
+
+                                                    <div v-if='index === 1'>                                              
+                                                        <v-btn icon @click='dialog_1 = true'>
+                                                            <v-icon>
+                                                                mdi-pen
+                                                            </v-icon>
+                                                        </v-btn>
+                                                    </div>
+                                                </v-col>
+                                            </v-row>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    <v-divider
+                                        v-if="index < Object.keys(items).length"
+                                        :key="item"
+                                    ></v-divider>
+                                </template>
+                            </v-list>
+                        </v-col>
                     </v-row>
-                    <v-row v-else justify="center" class="mb-5 mt-5">
-                <v-avatar size='100'>
-                    <v-img
-                    src="@/assets/icon/kame.jpg"
-                    >
-                    </v-img>
-                </v-avatar>
-            </v-row>
-                    <v-card
-                        height = "450"
-                        rounded="xl"
-                    >
-                        <v-container>
-                            <v-row>
-                                <v-col>
-                                    <v-list two-line>
-                                        <template v-for="(item, key, index) in items">
-                                            <v-list-item :key = key>
-                                                <v-list-item-content>
-                                                    <v-list-item-title>
-                                                        {{key}}
-                                                    </v-list-item-title>
-                                                    <v-row>
-                                                        <v-col cols="9">
-                                                            <v-list-item-subtitle>
-                                                                {{item}}
-                                                            </v-list-item-subtitle>
-                                                        </v-col>
-                                                        <v-col>  
-                                                            <div v-if='index === 0'>                                              
-                                                                <v-btn icon @click='dialog_0 = true'>
-                                                                    <v-icon>
-                                                                        mdi-pen
-                                                                    </v-icon>
-                                                                </v-btn>
-                                                            </div>
-
-                                                            <div v-if='index === 1'>                                              
-                                                                <v-btn icon @click='dialog_1 = true'>
-                                                                    <v-icon>
-                                                                        mdi-pen
-                                                                    </v-icon>
-                                                                </v-btn>
-                                                            </div>
-                                                        </v-col>
-                                                    </v-row>
-                                                </v-list-item-content>
-                                            </v-list-item>
-                                            <v-divider
-                                                v-if="index < Object.keys(items).length"
-                                                :key="item"
-                                            ></v-divider>
-                                        </template>
-                                    </v-list>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </v-card>
+                </v-container>
+            </v-card>
 
             <v-dialog
                 v-model="dialog_1"
