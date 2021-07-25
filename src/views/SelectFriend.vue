@@ -73,6 +73,7 @@
 
 <script>
 import axios from '@/api/index'
+import {mapState} from 'vuex'
 
 export default {
     data: () => ({
@@ -83,23 +84,18 @@ export default {
           'avatar': null,
           'birthdate': null
         },
-        railsURL: 'https://13.114.43.226'
+        railsURL: 'https://54.168.35.214/v1',
         // railsURL: "http://localhost:3000"
     }),
     async mounted() {
     await axios()
-      .get('/family/' + localStorage.getItem('id'),
+      .get('/family/' + this.user_info["id"],
       {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-        },
+        headers: this.user_info
       },
       )
       .then(response => (
-            console.log(response),
-            this.frineds = response.data.friends
+        this.frineds = response.data.friends
     )
     );
   },
@@ -108,7 +104,7 @@ export default {
         this.$router.push({name: 'SendMessage', params: {to_id: id}})
       },      
       showProfile(id) {
-        this.$router.push({name: 'OtherProfile', params: {profile_id: id}})
+        this.$router.push({name: 'FriendProfile', params: {profile_id: id}})
       },     
       showRequest() {
         this.$router.push({name: 'ShowRequest'})
@@ -117,5 +113,8 @@ export default {
         this.$router.push({name: 'TimeLine'})
       }
     },
+   computed: {
+        ...mapState(["user_info"]),
+    }
 }
 </script>

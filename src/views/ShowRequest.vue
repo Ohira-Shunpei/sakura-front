@@ -130,6 +130,7 @@
 
 <script>
 import axios from '@/api/index'
+import {mapState} from 'vuex'
 
 export default {
   data () {
@@ -149,30 +150,26 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState(["user_info"]),
+  },
+
   mounted() {
     axios()
-    .get('/users/' + localStorage.getItem('id') + '/followings',
+    .get('/users/' + this.user_info['id'] + '/followings',
     {
-      headers: {
-          'access-token': localStorage.getItem('access-token'),
-          uid: localStorage.getItem('uid'),
-          client: localStorage.getItem('client'),
-      },
+      headers: this.user_info
     },
     )
-    .then(response => (this.toFriend = response.data , console.log(response.data))),
+    .then(response => (this.toFriend = response.data)),
     
     axios()
-    .get('/users/' + localStorage.getItem('id') + '/followers',
+    .get('/users/' + this.user_info['id'] + '/followers',
     {
-      headers: {
-          'access-token': localStorage.getItem('access-token'),
-          uid: localStorage.getItem('uid'),
-          client: localStorage.getItem('client'),
-      },
+      headers: this.user_info
     },
     )
-    .then(response => (this.fromFriend = response.data , console.log(response.data)))
+    .then(response => (this.fromFriend = response.data))
   },
 
   methods: {
@@ -200,16 +197,11 @@ export default {
           status: 'true'
         },
         {
-            headers: {
-              'access-token': localStorage.getItem('access-token'),
-              uid: localStorage.getItem('uid'),
-              client: localStorage.getItem('client'),
-            },
+            headers: this.user_info
         }
         )
         .then(response => (
             this.status = response.data.status, 
-            console.log(response),
             // this.$router.go({path: this.$router.currentRoute.path, force: true})
             this.$router.push({name: 'Send'})
         ))
@@ -219,11 +211,7 @@ export default {
           params:{email: this.mail}
         },
         {
-            headers: {
-            'access-token': localStorage.getItem('access-token'),
-                uid: localStorage.getItem('uid'),
-                client: localStorage.getItem('client'),
-            },
+          headers: this.user_info
         }
         )
         .then(response => (
@@ -276,15 +264,10 @@ export default {
         followed_relation: this.followed_relation
       }, 
       {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-          },
+        headers: this.user_info
       }
       )
       .then(response => (
-        console.log(response), 
         this.tmp_status = response.data.status
       ));
         console.log(this.tmp_status)
@@ -299,5 +282,6 @@ export default {
       this.$router.push({name: 'Send'})
     }
   },
+  
 }
 </script>

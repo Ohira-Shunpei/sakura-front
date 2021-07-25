@@ -1,18 +1,21 @@
 <template>
     <v-container fluid fill-height class='bg'>
-        <v-layout wrap class='justify-center align-center'>
+        <v-row class='mt-3 ml-3'><p class="text-h6"> 大切な人のプロフィール </p></v-row>
+        <v-row class='mr-2 mt-0 mb-0'>
+            <v-col cols='1'>
+                <v-btn icon @click='returnPage'>
+                <v-icon>
+                    mdi-arrow-left-thick
+                </v-icon>
+                </v-btn>
+            </v-col>
+        </v-row>
+        <v-layout wrap class='justify-center'>
             <v-flex xs12 sm9 md6>
-                <v-row>
-                    <v-btn icon @click='returnPage'>
-                        <v-icon>
-                            mdi-arrow-left-thick
-                        </v-icon>
-                    </v-btn>
-                </v-row>
                 <v-row justify="center" class="mb-5 mt-5">
                         <v-avatar size='100'>
                             <v-img
-                            v-bind:src="railsURL + profile.avatar"
+                            v-bind:src="railsURL + avatar"
                             >
                             </v-img>
                         </v-avatar>
@@ -53,21 +56,15 @@
 
 <script>
 import axios from '@/api/index'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     props: ['profile_id'],
     data: () => ({
-
-      profile:{
-          avatar : '',
-      },
- 
-    //   comment: '卒業まであとわずか．\n２月にイタリアへの卒業旅行，ちゃんと行けるかなー',
-      post: {},
+      avatar : '',
       uploadedImage: '',
       items: {},
-      railsURL: 'https://13.114.43.226'
+      railsURL: 'https://54.168.35.214/v1'
     //   railsURL: "http://localhost:3000"
     }),
 
@@ -75,17 +72,11 @@ export default {
     await axios()
       .get('/profile/' + this.profile_id,
       {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-        },
+        headers: this.user_info
       },
       )
       .then(response => (
-            // this.profile.name = response.data.name, 
-            this.profile.avatar = response.data.avatar_url, 
-            // this.profile.birthdate = response.data.birthdate,
+            this.avatar = response.data.avatar_url, 
             this.items['Name'] = response.data.name,
             this.items['Date of birth'] = response.data.birthdate,
             this.items['E-mail'] = response.data.email,
@@ -97,7 +88,10 @@ export default {
       returnPage(){
         this.$router.push({name: 'Send'})
         }
-  }
+  },
+  computed: {
+    ...mapState(["user_info"]),
+}
 }
 </script>
 

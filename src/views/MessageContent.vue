@@ -18,12 +18,11 @@
           <v-row class='mt-1'>
               <v-col class='mt-3 ml-1' cols='2'>
                   <v-img 
-                  :src="railsURL + avatar_url"
+                  :src="railsURL + avatar"
                   style="object-fit: cover;"
                   max-height="50"
                   max-width="40"
                   > 
-                    
                   </v-img>
               </v-col>
               <v-col> <v-divider vertical/> </v-col>
@@ -66,36 +65,33 @@
 
 <script>
 import axios from '@/api/index'
+import { mapState } from 'vuex'
 var japaneseTime = ''
 var japaneseTime2 = ''
 
 export default {
-    // props: {
-    //     message_id: String
-    // },
     data: () => ({
       message_id: '',
       message: {},
       uploadedImage: '',
       // railsURL: "http://localhost:3000",
-      railsURL: 'https://13.114.43.226',
-      avatar_url: '',
+      railsURL: 'https://54.168.35.214/v1',
+      avatar: '',
       from_name: ''
     }),
+    computed: {
+    ...mapState(["user_info"]),
+    },
     created(){
         this.message_id = this.$route.params.message_id,
-        this.avatar_url = this.$route.params.avatar_url,
+        this.avatar = this.$route.params.avatar_url,
         this.from_name = this.$route.params.from_name
     },
     mounted() { 
       axios()
-        .get('/users/' + localStorage.getItem('id') + '/messages/' + this.message_id,
+        .get('/users/' + this.user_info['id'] + '/messages/' + this.message_id,
         {
-          headers: {
-            'access-token': localStorage.getItem('access-token'),
-              uid: localStorage.getItem('uid'),
-              client: localStorage.getItem('client'),
-          },
+          headers: this.user_info
         },
         )
         .then(response => (

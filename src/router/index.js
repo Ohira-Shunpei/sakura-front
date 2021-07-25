@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
 import SelectFriend from '@/views/SelectFriend.vue'
-import Received from '@/views/ReceivedPage.vue'
 import MessageContent from '@/views/MessageContent.vue'
-import OtherProfile from '@/views/OtherProfile.vue'
+import FriendProfile from '@/views/FriendProfile.vue'
 import Profile from '@/views/Profile.vue'
 import ProfileEdit from '@/views/ProfileEdit.vue'
 import Test from '@/views/Test.vue'
@@ -25,20 +23,10 @@ const routes = [
     meta: { isPublic: true}
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/send',
     name: 'Send',
     component: SelectFriend,
     props: true
-  },
-  {
-    path: '/received',
-    name: 'Received',
-    component: Received
   },
   {
     path: '/profile',
@@ -51,9 +39,9 @@ const routes = [
     component: ProfileEdit
   },
   {
-    path: '/other_profile',
-    name: 'OtherProfile',
-    component: OtherProfile,
+    path: '/friend_profile',
+    name: 'FriendProfile',
+    component: FriendProfile,
     props: true
   },
   {

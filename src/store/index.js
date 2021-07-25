@@ -6,36 +6,30 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user_token: { // 追加
+    user_info: { // 追加
       uid: '',
       "access-token": '',
       client: '',
+      id: '',
     },
-    flash_message: { // 追加
-      status: false,
-      messasge: ''
-    },
-    timeline: '' //プロフィール画面の一言
+    login_status: false
   },
   mutations: {
-    USER_LOGIN(state, user_token) {
-      state.user_token = user_token
+    USER_LOGIN(state, user_info) {
+      state.user_info = user_info
     },
-    setMessage(state, payload) { // 追加
-      state.flash_message = payload
-    },
-    editComment(state, timeline){
-      state.timeline = timeline
+    KEEP_LOGIN(state, login_status) {
+      state.login_status = login_status
     }
   },
   actions: {
-    async userLogin({ commit }, user_token) {
-      commit('USER_LOGIN', user_token)
-      return user_token
+    async userLogin({ commit }, user_info) {
+      commit('USER_LOGIN', user_info)
+      return user_info
     },
-    async editComment({ commit }, timeline) {
-      commit('editComment', timeline)
-      return timeline
+    async keepLogin({ commit }, login_status) {
+      commit('KEEP_LOGIN', login_status)
+      return login_status
     },
   },
   plugins: [createPersistedState({})],

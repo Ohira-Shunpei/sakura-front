@@ -13,14 +13,14 @@
         <v-layout wrap class='justify-center'>
             <v-flex xs12 sm9 md6>
                 <v-divider class='mt-5'/>
-                <v-row v-if='profile.avatar' justify="center" class='mt-10 mb-15'>
+                <v-row v-if='avatar' justify="center" class='mt-10 mb-15'>
                     <v-btn
                         icon
                         @click="dialog_avatar = true"
                     >
                         <v-avatar size='100'>
                             <v-img
-                            v-bind:src="railsURL + profile.avatar"
+                            v-bind:src="railsURL + avatar"
                             >
                             </v-img>
                         </v-avatar>
@@ -263,8 +263,8 @@
 
 <script>
 import axios from '@/api/index'
-// import { mapState } from 'vuex'
-const year_start = 1930
+import { mapState } from 'vuex'
+const year_start = 1950
 const year_end = 2030
 const ageRange = new Array(year_end - year_start + 1).fill(null).map((_, i) => i + year_start)
 const month_start = 1
@@ -275,130 +275,110 @@ const daysRange = [...Array(31)].map((_, i) => i)
 
 export default {
     data: () => ({
-      year: '',
-      yearrange: ageRange,
-      month: '',
-      monthrange: monthRange,
-      day: '',
-      daysrange: daysRange,
-      dialog_0: false,
-      dialog_1: false,
-      dialog_avatar: false,
-      post: {},
-      uploadedImage: '',
-      items: {},
-      profile:{
-          avatar : '',
-      },
-      lastname: '',
-      firstname: '',
-      railsURL: 'https://13.114.43.226'
-    //   railsURL: "http://localhost:3000"
+        year: '',
+        yearrange: ageRange,
+        month: '',
+        monthrange: monthRange,
+        day: '',
+        daysrange: daysRange,
+        dialog_0: false,
+        dialog_1: false,
+        dialog_avatar: false,
+        uploadedImage: '',
+        items: {},
+        avatar : '',
+        lastname: '',
+        firstname: '',
+        railsURL: 'https://54.168.35.214/v1',
+        // railsURL: "http://localhost:3000"
     }),
 
     async mounted() {
     await axios()
-      .get('/profile/' + localStorage.getItem('id'),
+      .get('/profile/' + this.user_info["id"],
       {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-        },
+        headers: this.user_info
       },
       )
       .then(response => ( 
-            this.profile.avatar = response.data.avatar_url, 
+            this.avatar = response.data.avatar_url, 
             this.items['Name'] = response.data.name,
             this.items['Date of birth'] = response.data.birthdate,
-            this.items['E-mail'] = response.data.email,
-            console.log(this.items)
+            this.items['E-mail'] = response.data.email
     )
     );
   },
-  methods: {
-      registerBirthdate(){
-        axios()
-        .put('/update_birthdate/',
-        {
-            id: localStorage.getItem('id'),
-            year: this.year,
-            month: this.month,
-            day: this.day
-        },
-        {
-            headers: {
-                'access-token': localStorage.getItem('access-token'),
-                uid: localStorage.getItem('uid'),
-                client: localStorage.getItem('client'),
+    methods: {
+        registerBirthdate(){
+            axios()
+            .put('/update_birthdate/',
+            {
+                id: localStorage.getItem('id'),
+                year: this.year,
+                month: this.month,
+                day: this.day
             },
-        },
-        )
-        .then(response => (
-            console.log(response),
-            // this.$router.go({path: this.$router.currentRoute.path, force: true})
-            this.$router.push({name: 'Profile'})  
-        ))
-      },
-    changeName(){
-        this.name =this.lastname + " " +this.firstname
-        axios()
-        .put('/users/' + localStorage.getItem('id'),
-        {
-            name: this.name
-        },
-        {
-            headers: {
-                'access-token': localStorage.getItem('access-token'),
-                uid: localStorage.getItem('uid'),
-                client: localStorage.getItem('client'),
+            {
+                headers: this.user_info
             },
+            )
+            .then(response => (
+                console.log(response),
+                // this.$router.go({path: this.$router.currentRoute.path, force: true})
+                this.$router.push({name: 'Profile'})  
+            ))
         },
-        )
-        .then(response => (
-            console.log(response),
-            // this.$router.go({path: this.$router.currentRoute.path, force: true})
-            this.$router.push({name: 'Profile'})  
-        ))
+        changeName(){
+            this.name =this.lastname + " " +this.firstname
+            axios()
+            .put('/users/' + this.user_info["id"],
+            {
+                name: this.name
+            },
+            {
+                headers: this.user_info
+            },
+            )
+            .then(response => (
+                console.log(response),
+                this.$router.push({name: 'Profile'})  
+            ))
+        },
+        onFileChange(e) {
+            e.preventDefault();
+            let files = e.target.files;
+            this.uploadedImage = files[0];
+            this.profile.avatar = this.uploadedImage
+        },
+        postItem() {
+            let formData = new FormData();
+            formData.append('avatar', this.uploadedImage);
+            formData.append('id', localStorage.getItem('id'));
+            console.log(formData)
+            axios().
+            put('/update_avatar',
+            formData,
+            {
+                headers: this.user_info
+            },
+            ).then(response => {
+            this.uploadedImage = ''
+            this.$refs.file.value = ''
+            this.avatar = response.data.avatar,
+            //   this.$router.go({path: this.$router.currentRoute.path, force: true})
+                this.$router.push({name: 'Profile'})  
+            }).catch(e => {
+            console.log(e)
+            })
+        },
+        returnPage(){
+        this.$router.push({name: 'Profile'})
+        }
     },
-    onFileChange(e) {
-        e.preventDefault();
-        let files = e.target.files;
-        this.uploadedImage = files[0];
-        this.profile.avatar = this.uploadedImage
-        console.log(files)
-        console.log(this.uploadedImage)
-     },
-    postItem() {
-        let formData = new FormData();
-        formData.append('avatar', this.uploadedImage);
-        formData.append('id', localStorage.getItem('id'));
-        console.log(formData)
-        axios().
-        put('/update_avatar',
-        formData,
-        {
-            headers: {
-                'access-token': localStorage.getItem('access-token'),
-                uid: localStorage.getItem('uid'),
-                client: localStorage.getItem('client'),
-            },
-        },
-        ).then(response => {
-          this.uploadedImage = ''
-          this.$refs.file.value = ''
-          this.profile.avatar = response.data.avatar,
-          console.log(response) ,
-        //   this.$router.go({path: this.$router.currentRoute.path, force: true})
-            this.$router.push({name: 'Profile'})  
-        }).catch(e => {
-          console.log(e)
-        })
-      },
-    returnPage(){
-    this.$router.push({name: 'Profile'})
+
+    computed: {
+        ...mapState(["user_info"]),
     }
-    },
 }
 </script>
 

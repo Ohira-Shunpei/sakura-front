@@ -155,20 +155,16 @@ export default {
       message: {},
       uploadedImage: '',
       // railsURL: "http://localhost:3000"
-      railsURL: 'https://13.114.43.226'
+      railsURL: 'https://54.168.35.214/v1',
     }
   },
   computed: {
-    ...mapState(['user_token'],),
+    ...mapState(['user_info'],),
   },
   mounted() {
     axios()
       .get('/users/' + this.to_id,{
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-        },
+        headers: this.user_info
       },
       console.log(this.user_token)
       )
@@ -185,11 +181,7 @@ export default {
       formData.append('body', this.body);
       formData.append('time', date.getTime() / 1000);
       axios().post('/users/' + localStorage.getItem('id') + '/messages', formData, {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-          },
+        headers: this.user_info
       }
       )
       .then(response => ( 

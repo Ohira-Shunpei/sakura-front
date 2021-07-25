@@ -83,7 +83,7 @@
             </v-row>
             <v-row class='justify-center'>
               <v-switch
-                v-model="auto"
+                v-model="login_status"
                 class="ma-1"
                 label="次回から自動ログインする"
               ></v-switch>
@@ -95,6 +95,7 @@
 <script>
 import axios from '@/api/index'
 
+
 export default {
   data() {
     return {
@@ -103,96 +104,76 @@ export default {
       name: "",
       email: "",
       password: "",
-      title: "",
-      content: "",
-      tasks: [],
-      comment: "",
-      posts: [],
       user: {},
-      auto: "",
+      login_status: false,
     };
   },
+
+  // mounted() {
+  //     if (this.$store.state.login_status) {
+  //       this.$router.push({name: 'TimeLine'})
+  //     }
+  // },
+
   methods: {
     async signUp() {
       this.name =this.lastname + " " +this.firstname
-      console.log(this.name)
+
       await axios()
         .post("/auth", {
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-          localStorage.setItem(
-            "access-token",
-            response.headers["access-token"]
-          );
-          localStorage.setItem("client", response.headers["client"]);
-          localStorage.setItem("uid", response.headers["uid"]);
-          localStorage.setItem("id", response.data.data["id"]);
+          console.log(response)
           this.user = {
             uid: response.headers["uid"],
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
             id: response.data.data["id"],
           },
-        
-          console.log(this.user),
           this.$store.dispatch('userLogin', this.user)
-          this.$store.commit('setMessage', {
-          status: false,
-        })
-        }
-        );
-      this.id = localStorage.getItem('id')
-      console.log(this.id)
-      await axios().put('/users/' + this.id, {
+        });
+      await axios().put('/users/' + this.user["id"], {
         email: this.email,
         password: this.password,
         name: this.name
       },
       {
         headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
+           'access-token': this.user["access-token"],
+            uid: this.user["uid"],
+            client: this.user["client"],
           },
       }
       )
-      if (this.email == localStorage.getItem("uid")){
+      this.$store.dispatch('keepLogin', this.status)
+      if (this.email == this.user["id"]){
             this.$router.push({name: 'TimeLine'})
       }
     },
+
     signIn() {
-      console.log(this.email);
-      console.log(this.password);
       axios()
         .post("/auth/sign_in", {
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-          localStorage.setItem(
-            "access-token",
-            response.headers["access-token"]
-          );
-          localStorage.setItem("client", response.headers["client"]);
-          localStorage.setItem("uid", response.headers["uid"]);
-          localStorage.setItem("id", response.data.data["id"]);
           this.user = {
             uid: response.headers["uid"],
             "access-token": response.headers["access-token"],
             client: response.headers["client"],
+            id: response.data.data["id"],
           },
+          console.log(this.login_status)
           this.$store.dispatch('userLogin', this.user)
-          this.$store.commit('setMessage', {
-          status: false,
-        })
-          if (this.email == response.headers["uid"]){
+          this.$store.dispatch('keepLogin', this.login_status)
+          if (this.email == this.user["uid"]){
             this.$router.push({name: 'TimeLine'})
           }
         });    
     },
-    
   },
 };
 </script>

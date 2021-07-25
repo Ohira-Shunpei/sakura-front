@@ -19,10 +19,10 @@
         <v-layout wrap class='justify-center'>
             <v-flex xs12 sm9 md6>
             <v-divider class='mt-0'/>
-            <v-row v-if="profile.avatar" justify="center" class="mb-5 mt-5">
+            <v-row v-if="avatar" justify="center" class="mb-5 mt-5">
                 <v-avatar size='100'>
                     <v-img
-                    v-bind:src="railsURL + profile.avatar"
+                    v-bind:src="railsURL + avatar"
                     >
                     </v-img>
                 </v-avatar>
@@ -71,54 +71,39 @@
 
 <script>
 import axios from '@/api/index'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     data: () => ({
-
-      profile:{
-          avatar : '',
-      },
- 
-    //   comment: '卒業まであとわずか．\n２月にイタリアへの卒業旅行，ちゃんと行けるかなー',
-      post: {},
+      avatar : '',
       uploadedImage: '',
       items: {},
-      railsURL: 'https://13.114.43.226'
+      railsURL: 'https://54.168.35.214/v1',
     //   railsURL: "http://localhost:3000"
     }),
     async mounted() {
     await axios()
-      .get('/profile/' + localStorage.getItem('id'),
+      .get('/profile/' + this.user_info["id"],
       {
-        headers: {
-           'access-token': localStorage.getItem('access-token'),
-            uid: localStorage.getItem('uid'),
-            client: localStorage.getItem('client'),
-        },
+        headers: this.user_info
       },
       )
       .then(response => (
-            // this.profile.name = response.data.name, 
-            this.profile.avatar = response.data.avatar_url, 
-            // this.profile.birthdate = response.data.birthdate,
+            this.avatar = response.data.avatar_url, 
             this.items['Name'] = response.data.name,
             this.items['Date of birth'] = response.data.birthdate,
-            this.items['E-mail'] = response.data.email,
-            console.log(this.items)
-    )
-    );
+            this.items['E-mail'] = response.data.email
+    ));
   },
   methods: {
       editProfile(){
-          console.log(this.profile.avatar)
-          console.log(this.items['Name'])
-          console.log(this.items['Date of birth'])
           this.$router.push({name: 'ProfileEdit'})
       },
       returnPage(){
         this.$router.push({name: 'TimeLine'})
-    }
+    }},
+    computed: {
+        ...mapState(["user_info"]),
     }
 }
 </script>

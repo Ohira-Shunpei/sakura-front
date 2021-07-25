@@ -1,7 +1,13 @@
 <template>
     <v-container>
        <v-row class='mt-3 ml-3'>
-            <p class="text-h6"> ホーム </p>
+          <v-col cols='4'><p class="text-h6"> ホーム </p></v-col>
+          <v-col cols='6'/>
+          <v-col cols='1'>
+            <v-btn icon @click="out">
+              <v-icon> mdi-logout </v-icon>
+            </v-btn>
+          </v-col>
         </v-row>
        <v-row justify="end">
           <v-col cols='2'>
@@ -128,12 +134,14 @@ var japaneseTime = ''
 var japaneseTime2 = ''
 
 import axios from '@/api/index'
+import { mapState } from "vuex";
+
   export default {
     data: () => ({
       messages: [],
       dialog: false,
-      // railsURL: "http://localhost:3000",
-      railsURL: 'https://13.114.43.226',
+      railsURL: "http://localhost:3000",
+      // railsURL: 'https://13.114.43.226',
       users: [],
       avatar_urls: [],
       users_name: [],
@@ -143,10 +151,6 @@ import axios from '@/api/index'
       sortedMessages: []
     }),
     methods: {
-        saveComment(){
-            console.log('aaaaa')
-            console.log(this.messages)
-        },
         showFriend(){
           this.$router.push({name: "Send"})
         },
@@ -164,9 +168,9 @@ import axios from '@/api/index'
           delete('/messages/' + m.id,
           {
               headers: {
-                  'access-token': localStorage.getItem('access-token'),
-                  uid: localStorage.getItem('uid'),
-                  client: localStorage.getItem('client'),
+                'access-token': this.user_info["access-token"],
+                uid: this.user_info["uid"],
+                client: this.user_info["client"]
               },
           },
           ).then(response => {
@@ -175,32 +179,46 @@ import axios from '@/api/index'
           }).catch(e => {
             console.log(e)
           })
-        }
+        },
+        async out() {
+          await axios().delete("/auth/sign_out", {
+              headers: this.user_info
+            })
+
+          if (!this.$store.state.login_status) {
+             this.$store.dispatch('userLogin', 
+              {
+                "access-token": "",
+                "uid": "",
+                "id": "",
+                "client": ""
+              }
+              )
+          }
+          this.$router.push({name: 'Login'})
+    }
     },
     async mounted() {
       await axios()
-        .get('/profile/' + localStorage.getItem('id'),
+        .get('/profile/' + this.user_info["id"],
         {
           headers: {
-            'access-token': localStorage.getItem('access-token'),
-              uid: localStorage.getItem('uid'),
-              client: localStorage.getItem('client'),
+            'access-token': this.user_info["access-token"],
+            uid: this.user_info["uid"],
+            client: this.user_info["client"]
           },
         },
         )
         .then(response => (
-              // this.profile.name = response.data.name, 
-              this.myavatar = response.data.avatar_url, 
-              // this.profile.birthdate = response.data.birthdate,
-              console.log(this.myavatar)
-      )
+          this.myavatar = response.data.avatar_url
+        )
       );
       await axios()
         .get('/users/' + localStorage.getItem('id') + '/messages',{
           headers: {
-            'access-token': localStorage.getItem('access-token'),
-              uid: localStorage.getItem('uid'),
-              client: localStorage.getItem('client'),
+            'access-token': this.user_info["access-token"],
+            uid: this.user_info["uid"],
+            client: this.user_info["client"]
           },
         },
         )
@@ -226,36 +244,27 @@ import axios from '@/api/index'
         this.users.forEach(user =>
           axios()
             .get('users/' + user.id ,{
-              headers: {
-                'access-token': localStorage.getItem('access-token'),
-                  uid: localStorage.getItem('uid'),
-                  client: localStorage.getItem('client'),
-              },
+              headers: this.user_info
             }).then(response=> (
               this.users_name.push(response.data.name),
-              this.avatar_urls.push(response.data.avatar_url),
-              console.log(response)
+              this.avatar_urls.push(response.data.avatar_url)
             ))    
         );
       await axios()
         .get('/sending/' ,{
-          headers: {
-            'access-token': localStorage.getItem('access-token'),
-              uid: localStorage.getItem('uid'),
-              client: localStorage.getItem('client'),
-          },
+          headers: this.user_info
         },
         )
         .then(response => (
-          console.log(response),
           this.sending_messages = response.data.messages,
           this.content = this.sending_messages.length
         ))
     },
     computed: {
-     sortedmessages(){
-        return this.messages.slice().sort((a, b) => {
-          return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
+      ...mapState(["user_info"]),
+      sortedmessages(){
+          return this.messages.slice().sort((a, b) => {
+            return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
         })
     }
   }
