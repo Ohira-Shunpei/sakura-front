@@ -140,8 +140,8 @@ import { mapState } from "vuex";
     data: () => ({
       messages: [],
       dialog: false,
-      railsURL: "http://localhost:3000",
-      // railsURL: 'https://13.114.43.226',
+      // railsURL: "http://localhost:3000",
+      railsURL: 'https://54.168.35.214',
       users: [],
       avatar_urls: [],
       users_name: [],

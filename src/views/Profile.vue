@@ -78,7 +78,7 @@ export default {
       avatar : '',
       uploadedImage: '',
       items: {},
-      railsURL: 'https://54.168.35.214/v1',
+      railsURL: 'https://54.168.35.214',
     //   railsURL: "http://localhost:3000"
     }),
     async mounted() {

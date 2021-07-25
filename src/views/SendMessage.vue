@@ -155,7 +155,7 @@ export default {
       message: {},
       uploadedImage: '',
       // railsURL: "http://localhost:3000"
-      railsURL: 'https://54.168.35.214/v1',
+      railsURL: 'https://54.168.35.214',
     }
   },
   computed: {
