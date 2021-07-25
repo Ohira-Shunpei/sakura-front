@@ -148,7 +148,7 @@ export default {
       }
       )
       this.$store.dispatch('keepLogin', this.status)
-      if (this.email == this.user["id"]){
+      if (this.email == this.user["uid"]){
             this.$router.push({name: 'TimeLine'})
       }
     },
