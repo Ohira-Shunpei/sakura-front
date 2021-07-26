@@ -12,7 +12,9 @@ export default new Vuex.Store({
       client: '',
       id: '',
     },
-    login_status: false
+    login_status: false,
+    // railsURL: "http://localhost:3000"
+    railsURL: 'https://54.168.35.214'
   },
   mutations: {
     USER_LOGIN(state, user_info) {

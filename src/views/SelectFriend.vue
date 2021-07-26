@@ -84,8 +84,6 @@ export default {
           'avatar': null,
           'birthdate': null
         },
-        railsURL: 'https://54.168.35.214',
-        // railsURL: "http://localhost:3000"
     }),
     async mounted() {
     await axios()
@@ -114,7 +112,7 @@ export default {
       }
     },
    computed: {
-        ...mapState(["user_info"]),
+        ...mapState(["user_info", "railsURL"]),
     }
 }
 </script>

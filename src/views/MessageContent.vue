@@ -75,12 +75,12 @@ export default {
       message: {},
       uploadedImage: '',
       // railsURL: "http://localhost:3000",
-      railsURL: 'https://54.168.35.214',
+      // railsURL: 'https://54.168.35.214',
       avatar: '',
       from_name: ''
     }),
     computed: {
-    ...mapState(["user_info"]),
+    ...mapState(["user_info", "railsURL"]),
     },
     created(){
         this.message_id = this.$route.params.message_id,

@@ -64,7 +64,7 @@ export default {
       avatar : '',
       uploadedImage: '',
       items: {},
-      railsURL: 'https://54.168.35.214'
+    //   railsURL: 'https://54.168.35.214'
     //   railsURL: "http://localhost:3000"
     }),
 
@@ -90,7 +90,7 @@ export default {
         }
   },
   computed: {
-    ...mapState(["user_info"]),
+    ...mapState(["user_info", "railsURL"]),
 }
 }
 </script>

@@ -140,8 +140,6 @@ import { mapState } from "vuex";
     data: () => ({
       messages: [],
       dialog: false,
-      // railsURL: "http://localhost:3000",
-      railsURL: 'https://54.168.35.214',
       users: [],
       avatar_urls: [],
       users_name: [],
@@ -202,11 +200,7 @@ import { mapState } from "vuex";
       await axios()
         .get('/profile/' + this.user_info["id"],
         {
-          headers: {
-            'access-token': this.user_info["access-token"],
-            uid: this.user_info["uid"],
-            client: this.user_info["client"]
-          },
+          headers: this.user_info
         },
         )
         .then(response => (
@@ -214,12 +208,8 @@ import { mapState } from "vuex";
         )
       );
       await axios()
-        .get('/users/' + localStorage.getItem('id') + '/messages',{
-          headers: {
-            'access-token': this.user_info["access-token"],
-            uid: this.user_info["uid"],
-            client: this.user_info["client"]
-          },
+        .get('/users/' + this.user_info['id'] + '/messages',{
+          headers: this.user_info
         },
         )
         .then(response => (
@@ -261,7 +251,7 @@ import { mapState } from "vuex";
         ))
     },
     computed: {
-      ...mapState(["user_info"]),
+      ...mapState(["user_info", "railsURL"]),
       sortedmessages(){
           return this.messages.slice().sort((a, b) => {
             return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
