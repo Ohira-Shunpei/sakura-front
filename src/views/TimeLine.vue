@@ -54,38 +54,83 @@
       </v-row>
       <v-divider></v-divider>
       <v-row justify="center" class='mt-5 mb-3'> 
-        <v-tab v-if='content > 0'>
-          <v-badge
-            color="pink"
-            icon="mdi-heart"
-          >
-          <v-badge
-            color='pink'
-            :content="content"
-            bottom
-          >
-            <v-img
-              src='@/assets/icon/kame.jpg'
-              max-height="100"
-              max-width="100"
+        <v-col cols='1' />
+        <v-col cols='3'>
+          <v-tab v-if='content > 0'>
+            <v-badge
+              color="pink"
+              icon="mdi-heart"
             >
-            </v-img>
-          </v-badge>
-          </v-badge>
-        </v-tab>
-        <v-tab v-if='content === 0'>
-          <v-badge
-            color="pink"
-            icon="mdi-heart"
-          >
-            <v-img
-              src='@/assets/icon/kame.jpg'
-              max-height="100"
-              max-width="100"
+            <v-badge
+              color='pink'
+              :content="content"
+              bottom
             >
-            </v-img>
-          </v-badge>
-        </v-tab>
+              <v-img
+                src='@/assets/icon/kame.jpg'
+                max-height="100"
+                max-width="100"
+              >
+              </v-img>
+            </v-badge>
+            </v-badge>
+          </v-tab>
+          <v-tab v-if='content === 0'>
+            <v-badge
+              color="pink"
+              icon="mdi-heart"
+            >
+              <v-img
+                src='@/assets/icon/kame.jpg'
+                max-height="100"
+                max-width="100"
+              >
+              </v-img>
+            </v-badge>
+          </v-tab>
+        </v-col>
+        <v-col cols='4' class='mt-15'>
+          <v-img
+              src='@/assets/icon/road.png'
+              max-height="100"
+              max-width="400"
+          />
+        </v-col>
+        <v-col cols='3'>
+          <v-tab v-if='content > 0'>
+            <v-badge
+              color="pink"
+              icon="mdi-heart"
+            >
+            <v-badge
+              color='pink'
+              :content="content"
+              bottom
+            >
+              <v-img
+                src='@/assets/icon/house.png'
+                max-height="100"
+                max-width="100"
+              >
+              </v-img>
+            </v-badge>
+            </v-badge>
+          </v-tab>
+          <v-tab v-if='content === 0'>
+            <v-badge
+              color="pink"
+              icon="mdi-heart"
+            >
+              <v-img
+                src='@/assets/icon/house.png'
+                max-height="100"
+                max-width="100"
+              >
+              </v-img>
+            </v-badge>
+          </v-tab>
+        </v-col>
+        <v-col cols='1'/>
       </v-row>
       <v-layout wrap>
       <v-flex v-for="(message, index) in sortedmessages" :key="message.time" xs12 sm9 md6 class='mt-5'>
