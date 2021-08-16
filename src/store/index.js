@@ -13,8 +13,8 @@ export default new Vuex.Store({
       id: '',
     },
     login_status: false,
-    // railsURL: "http://localhost:3000",
-    railsURL: 'https://www.sakuraproto.com',
+    railsURL: "http://localhost:3000",
+    // railsURL: 'https://www.sakuraproto.com',
     message: {
       title: "",
       body: "",
