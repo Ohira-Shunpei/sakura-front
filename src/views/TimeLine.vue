@@ -274,6 +274,7 @@ import { mapState } from "vuex";
                 + ' ' + ('0' + japaneseTime2.getHours()).slice(-2)
                 + ':' + ('0' + japaneseTime2.getMinutes()).slice(-2)
           )),
+          console.log(this.messages),
           this.users = response.data.users
         ));
         this.users.forEach(user =>
