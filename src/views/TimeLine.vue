@@ -45,7 +45,7 @@
             <v-btn icon @click='showProfile'>
                 <v-avatar size='30'>
                   <v-img
-                  src="@/assets/icon/kame.jpg"
+                  src="./../assets/icon/kame.jpg"
                   >
                   </v-img>
                 </v-avatar>
@@ -108,7 +108,7 @@
               bottom
             >
               <v-img
-                src='@/assets/icon/house.png'
+                src='./../assets/icon/house.png'
                 max-height="100"
                 max-width="100"
               >
@@ -122,7 +122,7 @@
               icon="mdi-heart"
             >
               <v-img
-                src='@/assets/icon/house.png'
+                src='./../assets/icon/house.png'
                 max-height="100"
                 max-width="100"
               >
@@ -297,11 +297,11 @@ import { mapState } from "vuex";
     },
     computed: {
       ...mapState(["user_info", "railsURL"]),
-      sortedmessages(){
-          return this.messages.slice().sort((a, b) => {
-            return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
-        })
+      // sortedmessages(){
+      //     return this.messages.slice().sort((a, b) => {
+      //       return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
+      //   })
+      // }
     }
-  }
   }
 </script>
