@@ -298,11 +298,11 @@ import { mapState } from "vuex";
     },
     computed: {
       ...mapState(["user_info", "railsURL"]),
-      // sortedmessages(){
-      //     return this.messages.slice().sort((a, b) => {
-      //       return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
-      //   })
-      // }
+      sortedmessages(){
+          return this.messages.slice().sort((a, b) => {
+            return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
+        })
+      }
     }
   }
 </script>
