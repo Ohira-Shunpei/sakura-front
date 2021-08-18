@@ -133,7 +133,7 @@
         <v-col cols='1'/>
       </v-row>
       <v-layout wrap>
-      <v-flex v-for="(message, index) in sortedmessages" :key="message.time" xs12 sm9 md6 class='mt-5'>
+      <v-flex v-for="(message, index) in messages" :key="message.time" xs12 sm9 md6 class='mt-5'>
         <!-- <v-alert outlined color="yellow darken-3" height="100" rounded="xl" width="100%"> -->
           <v-row align="center" justify="center" class='ma-1 mt-15'>
             <v-btn @click='showContent(message, index)' icon> 
