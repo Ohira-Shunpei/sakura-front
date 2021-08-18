@@ -293,6 +293,7 @@ import { mapState } from "vuex";
             .get('users/' + message.from_user_id ,{
               headers: this.user_info
             }).then(response=> (
+              console.log(response),
               this.users_name.push(response.data.name),
               this.avatar_urls.push(response.data.avatar_url)
             ))    
