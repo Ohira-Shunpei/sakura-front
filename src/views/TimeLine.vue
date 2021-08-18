@@ -305,7 +305,8 @@ import { mapState } from "vuex";
         )
         .then(response => (
           this.sending_messages = response.data.messages,
-          this.content = this.sending_messages.length
+          this.content = this.sending_messages.length,
+          console.log(this.users_name)
         ))
     },
     computed: {
