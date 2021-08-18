@@ -268,6 +268,7 @@ import { mapState } from "vuex";
         },
         )
         .then(response => (
+          console.log(response),
           this.messages = response.data.messages,
           this.messages.forEach(message =>
             (
