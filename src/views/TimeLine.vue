@@ -140,7 +140,7 @@
             <v-card height='95' rounded="xl" width="100%">
               <v-container>
                 <v-row>
-                  <v-col v-if="avatar_urls[index]" class='mt-3 ml-1' cols='2'>
+                  <v-col v-if="avatar_urls[index] > 0" class='mt-3 ml-1' cols='2'>
                       <v-img 
                       :src="railsURL + avatar_urls[index]"
                       style="object-fit: cover;"
