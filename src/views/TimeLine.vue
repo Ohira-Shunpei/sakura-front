@@ -284,17 +284,15 @@ import { mapState } from "vuex";
                 + '/' + ('0' + japaneseTime2.getDate()).slice(-2)
                 + ' ' + ('0' + japaneseTime2.getHours()).slice(-2)
                 + ':' + ('0' + japaneseTime2.getMinutes()).slice(-2)
-          )),
-          console.log(this.messages),
-          this.users = response.data.users
+          ))
         ))
-        console.log(this.message),
         this.messages.forEach(message => (
         
           axios()
             .get('users/' + message.from_user_id ,{
               headers: this.user_info
             }).then(response=> (
+              this.users.push(response.data.id),
               this.users_name.push(response.data.name),
               this.avatar_urls.push(response.data.avatar_url)
             ))  
@@ -310,14 +308,16 @@ import { mapState } from "vuex";
           this.content = this.sending_messages.length,
           console.log(this.users_name)
         ))
+        
+        this.messages = await this.messages.slice().sort((a, b) => {
+          return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
+        })
+
+        console.log(this.messages)
+      
     },
     computed: {
       ...mapState(["user_info", "railsURL"]),
-      sortedmessages(){
-          return this.messages.slice().sort((a, b) => {
-            return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
-        })
-      }
     }
   }
 </script>
