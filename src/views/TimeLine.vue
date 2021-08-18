@@ -286,6 +286,7 @@ import { mapState } from "vuex";
                 + ':' + ('0' + japaneseTime2.getMinutes()).slice(-2)
           ))
         ))
+
         this.messages.forEach(message => (
         
           axios()
@@ -308,16 +309,14 @@ import { mapState } from "vuex";
           this.content = this.sending_messages.length,
           console.log(this.users_name)
         ))
-        
-        this.messages = await this.messages.slice().sort((a, b) => {
-          return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
-        })
-
-        console.log(this.messages)
-      
     },
     computed: {
       ...mapState(["user_info", "railsURL"]),
+      sortedmessages(){
+          return this.messages.slice().sort((a, b) => {
+            return (a.time > b.time) ? -1 : (a.time < b.time) ? 1 : 0;
+        })
+      }
     }
   }
 </script>
