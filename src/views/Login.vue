@@ -125,7 +125,6 @@ export default {
           password: this.password,
         })
         .then((response) => {
-          console.log(response)
           this.user = {
             uid: response.headers["uid"],
             "access-token": response.headers["access-token"],
@@ -166,7 +165,6 @@ export default {
             client: response.headers["client"],
             id: response.data.data["id"],
           },
-          console.log(this.login_status)
           this.$store.dispatch('userLogin', this.user)
           this.$store.dispatch('keepLogin', this.login_status)
           if (this.email == this.user["uid"]){
@@ -175,6 +173,9 @@ export default {
         });    
     },
   },
+  mounted() {
+    this.$store.dispatch('changeURL', 'https://www.sakuraproto.com')
+  }
 };
 </script>
 
