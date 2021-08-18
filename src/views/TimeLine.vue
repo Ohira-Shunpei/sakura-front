@@ -287,10 +287,10 @@ import { mapState } from "vuex";
           )),
           console.log(this.messages),
           this.users = response.data.users
-        ));
-        this.users.forEach(user =>
+        ))
+        this.messages.forEach(message =>
           axios()
-            .get('users/' + user.id ,{
+            .get('users/' + message.from_user_id ,{
               headers: this.user_info
             }).then(response=> (
               this.users_name.push(response.data.name),
