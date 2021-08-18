@@ -140,9 +140,19 @@
             <v-card height='95' rounded="xl" width="100%">
               <v-container>
                 <v-row>
-                  <v-col class='mt-3 ml-1' cols='2'>
+                  <v-col v-if="avatar_urls[index]" class='mt-3 ml-1' cols='2'>
                       <v-img 
                       :src="railsURL + avatar_urls[index]"
+                      style="object-fit: cover;"
+                      max-height="40"
+                      max-width="40"
+                      > 
+                       
+                      </v-img>
+                  </v-col>
+                  <v-col v-else class='mt-3 ml-1' cols='2'>
+                      <v-img 
+                      src="./../assets/icon/kame.jpg"
                       style="object-fit: cover;"
                       max-height="40"
                       max-width="40"
