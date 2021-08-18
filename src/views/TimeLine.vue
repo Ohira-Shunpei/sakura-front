@@ -288,15 +288,16 @@ import { mapState } from "vuex";
           console.log(this.messages),
           this.users = response.data.users
         ))
-        this.messages.forEach(message =>
+        this.messages.forEach(message => (
+          console.log(message),
           axios()
             .get('users/' + message.from_user_id ,{
               headers: this.user_info
             }).then(response=> (
-              console.log(response),
               this.users_name.push(response.data.name),
               this.avatar_urls.push(response.data.avatar_url)
-            ))    
+            ))  
+        )  
         );
       await axios()
         .get('/sending/' ,{
