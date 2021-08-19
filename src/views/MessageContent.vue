@@ -120,9 +120,9 @@ export default {
                   + '/' + ('0' + (japaneseTime2.getMonth() + 1)).slice(-2)
                   + '/' + ('0' + japaneseTime2.getDate()).slice(-2)
                   + ' ' + ('0' + japaneseTime2.getHours()).slice(-2)
-                  + ':' + ('0' + japaneseTime2.getMinutes()).slice(-2)
-    )),
-    console.log(this.message)
+                  + ':' + ('0' + japaneseTime2.getMinutes()).slice(-2),
+              console.log(this.message)
+    ))
   },
   methods: {
      returnPage(){
